@@ -1,0 +1,38 @@
+{
+  "autoRetry": null,
+  "browser": null,
+  "disableVisuals": null,
+  "disallowInsecureCertificates": null,
+  "failOnJavaScriptError": null,
+  "filters": [],
+  "finalDelay": null,
+  "globalStepDelay": null,
+  "httpHeaders": [],
+  "language": null,
+  "links": [],
+  "maxAjaxDelay": null,
+  "maxConcurrentDataRows": null,
+  "maxWaitDelay": null,
+  "name": "GIEmail get subjects_in_dom",
+  "notifications": {},
+  "publicStatusEnabled": false,
+  "region": null,
+  "screenshotCompareEnabled": null,
+  "screenshotCompareThreshold": 0.1,
+  "startUrl": "",
+  "steps": [
+    {
+      "condition": null,
+      "optional": false,
+      "private": false,
+      "sequence": 0,
+      "command": "extractEval",
+      "target": "",
+      "value": "var subjects_in_dom = Array.from(document.getElementsByClassName('subject')).map(function(v){\n\treturn v.textContent.toLowerCase();\n});\ntry{\n    console.log('subjects in dom?',JSON.stringify(subjects_in_dom));\n}catch(e){\n    console.error(e);\n}\nreturn subjects_in_dom || [];",
+      "variableName": "subjects_in_dom"
+    }
+  ],
+  "testFrequency": 0,
+  "testFrequencyAdvanced": [],
+  "viewportSize": null
+}

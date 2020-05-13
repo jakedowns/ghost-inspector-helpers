@@ -1,0 +1,46 @@
+{
+  "autoRetry": null,
+  "browser": null,
+  "disableVisuals": null,
+  "failOnJavaScriptError": null,
+  "filters": [],
+  "finalDelay": null,
+  "globalStepDelay": null,
+  "httpHeaders": [],
+  "language": null,
+  "links": [],
+  "maxAjaxDelay": null,
+  "maxWaitDelay": null,
+  "name": "Mailtrap: Assert Email Received",
+  "notifications": {},
+  "publicStatusEnabled": false,
+  "region": null,
+  "screenshotCompareEnabled": null,
+  "screenshotCompareThreshold": 0.1,
+  "startUrl": "",
+  "steps": [
+    {
+      "condition": null,
+      "optional": false,
+      "private": false,
+      "sequence": 0,
+      "command": "open",
+      "target": "",
+      "value": "https://mailtrap.io/api/v1/inboxes/XXX/messages?search={{userEmail}}&api_token=XXX",
+      "variableName": ""
+    },
+    {
+      "condition": null,
+      "optional": false,
+      "private": false,
+      "sequence": 1,
+      "command": "assertEval",
+      "target": "",
+      "value": "let emails_array = JSON.parse(document.body.innerText);\nconsole.log('debug emails array ' + document.body.innerText);\nlet subject_matches = [];\nemails_array.map((v,k)=>{ \n    console.log(\"debug compare subject\", v.subject);\n\tif(v.subject.toLowerCase().indexOf(\"{{mailtrap_assert_subject}}\".toLowerCase()) > -1){\n\t\tsubject_matches.push(k);\n\t}\n});\nconsole.log(\"debug subject matches\",JSON.stringify({subject_matches, searching:\"{{mailtrap_assert_subject}}\"}));\nreturn subject_matches.length > 0;",
+      "variableName": ""
+    }
+  ],
+  "testFrequency": 0,
+  "testFrequencyAdvanced": [],
+  "viewportSize": null
+}

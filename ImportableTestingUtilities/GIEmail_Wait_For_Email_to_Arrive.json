@@ -1,0 +1,135 @@
+{
+  "autoRetry": null,
+  "browser": null,
+  "disableVisuals": null,
+  "disallowInsecureCertificates": null,
+  "failOnJavaScriptError": null,
+  "filters": [],
+  "finalDelay": null,
+  "globalStepDelay": null,
+  "httpHeaders": [],
+  "language": null,
+  "links": [],
+  "maxAjaxDelay": null,
+  "maxConcurrentDataRows": null,
+  "maxWaitDelay": null,
+  "name": "GIEmail Wait For Email to Arrive",
+  "notifications": null,
+  "publicStatusEnabled": false,
+  "region": null,
+  "screenshotCompareEnabled": null,
+  "screenshotCompareThreshold": 0.1,
+  "startUrl": "",
+  "steps": [
+    {
+      "condition": null,
+      "optional": false,
+      "private": false,
+      "sequence": 0,
+      "command": "assertEval",
+      "target": "",
+      "value": "let subjects = {{giemail_assert_emails_arrived_with_subjects}};\nreturn subjects.length > 0;",
+      "variableName": "",
+      "notes": "MUST set a `giemail_assert_emails_arrived_with_subjects` variable that is an array of string subjects for us to check first!"
+    },
+    {
+      "condition": null,
+      "optional": false,
+      "private": false,
+      "sequence": 1,
+      "command": "extractEval",
+      "target": "",
+      "value": "let subjects = {{giemail_assert_emails_arrived_with_subjects}};\nsubjects = subjects.map(function(v){\n\treturn v.toLowerCase();\n});\nreturn subjects;",
+      "variableName": "giemail_assert_emails_arrived_with_subjects"
+    },
+    {
+      "condition": null,
+      "optional": false,
+      "private": false,
+      "sequence": 2,
+      "command": "open",
+      "target": "",
+      "value": "http://email.ghostinspector.com/{{userEmail}}",
+      "variableName": ""
+    },
+    {
+      "condition": null,
+      "optional": false,
+      "private": false,
+      "sequence": 3,
+      "command": "store",
+      "target": "",
+      "value": "false",
+      "variableName": "giemail_all_subject_assertions_passing"
+    },
+    {
+      "condition": null,
+      "optional": false,
+      "private": false,
+      "sequence": 4,
+      "command": "store",
+      "target": "",
+      "value": "{{timestamp}}",
+      "variableName": "time_to_email_start"
+    },
+    {
+      "condition": null,
+      "optional": false,
+      "private": false,
+      "sequence": 5,
+      "command": "execute",
+      "target": "",
+      "value": "5ea9cbced9cd9b5f80d49c7b",
+      "variableName": "",
+      "notes": "// checks every 500ms for 60s"
+    },
+    {
+      "condition": null,
+      "optional": false,
+      "private": false,
+      "sequence": 6,
+      "command": "execute",
+      "target": "",
+      "value": "5ea9cbced9cd9b5f80d49c7b",
+      "variableName": "",
+      "notes": "// checks every 500ms for 60s"
+    },
+    {
+      "condition": null,
+      "optional": false,
+      "private": false,
+      "sequence": 7,
+      "command": "execute",
+      "target": "",
+      "value": "5ea9cbced9cd9b5f80d49c7b",
+      "variableName": "",
+      "notes": "// checks every 500ms for 60s"
+    },
+    {
+      "condition": {
+        "statement": "return \"{{giemail_all_subject_assertions_passing}}\" == \"true\"",
+        "result": false
+      },
+      "optional": false,
+      "private": false,
+      "sequence": 8,
+      "command": "eval",
+      "target": "",
+      "value": "console.log(\"time to email end \" + ({{timestamp}} - {{time_to_email_start}}));",
+      "variableName": ""
+    },
+    {
+      "condition": null,
+      "optional": false,
+      "private": false,
+      "sequence": 9,
+      "command": "assertEval",
+      "target": "",
+      "value": "return \"{{giemail_all_subject_assertions_passing}}\" == \"true\"",
+      "variableName": ""
+    }
+  ],
+  "testFrequency": 0,
+  "testFrequencyAdvanced": [],
+  "viewportSize": null
+}

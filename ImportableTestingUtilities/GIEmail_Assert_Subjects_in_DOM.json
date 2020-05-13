@@ -1,0 +1,81 @@
+{
+  "autoRetry": null,
+  "browser": null,
+  "disableVisuals": null,
+  "disallowInsecureCertificates": null,
+  "failOnJavaScriptError": null,
+  "filters": [],
+  "finalDelay": null,
+  "globalStepDelay": null,
+  "httpHeaders": [],
+  "language": null,
+  "links": [],
+  "maxAjaxDelay": null,
+  "maxConcurrentDataRows": null,
+  "maxWaitDelay": null,
+  "name": "GIEmail Assert Subjects in DOM",
+  "notifications": null,
+  "publicStatusEnabled": false,
+  "region": null,
+  "screenshotCompareEnabled": null,
+  "screenshotCompareThreshold": 0.1,
+  "startUrl": null,
+  "steps": [
+    {
+      "condition": {
+        "statement": "return \"{{giemail_all_subject_assertions_passing}}\" !== \"true\"; /* all asserts passing? */",
+        "result": false
+      },
+      "optional": false,
+      "private": false,
+      "sequence": 0,
+      "command": "pause",
+      "target": "",
+      "value": "3000",
+      "variableName": ""
+    },
+    {
+      "condition": {
+        "statement": "return \"{{giemail_all_subject_assertions_passing}}\" !== \"true\"; /* all asserts passing? */",
+        "result": false
+      },
+      "optional": false,
+      "private": false,
+      "sequence": 1,
+      "command": "refresh",
+      "target": "",
+      "value": "",
+      "variableName": ""
+    },
+    {
+      "condition": {
+        "statement": "return \"{{giemail_all_subject_assertions_passing}}\" !== \"true\"; /* all asserts passing? */",
+        "result": false
+      },
+      "optional": false,
+      "private": false,
+      "sequence": 2,
+      "command": "execute",
+      "target": "",
+      "value": "5ea9cb72d84e437e6a58cf13",
+      "variableName": ""
+    },
+    {
+      "condition": {
+        "statement": "return \"{{giemail_all_subject_assertions_passing}}\" !== \"true\"; /* all asserts passing? */",
+        "result": false
+      },
+      "optional": false,
+      "private": false,
+      "sequence": 3,
+      "command": "extractEval",
+      "target": "",
+      "value": "return new Promise((resolve,reject)=>{\n    function checkForEmails(){\n        var assertions = [];\n        var subject_assertions = {{giemail_assert_emails_arrived_with_subjects}};\n        var subjects_in_dom = {{subjects_in_dom}};\n        \n        for(var i=0; i<subject_assertions.length; i++){\n            // Exact Match\n            //assertions.push(subjects_in_dom.indexOf(subject_assertions[i]) >-1)\n            \n            // Partial Matching\n            let found = false;\n            for(var j=0; j<subjects_in_dom.length; j++){\n                if(subjects_in_dom[j].indexOf(subject_assertions[i]) >- 1){\n                    found = true;\n                }\n            }\n            assertions.push(found);\n        }\n        \n        let result = assertions.reduce(function(acc,curr){ \n        \treturn curr ? acc+1 : acc;\n        },0) === assertions.length;\n        \n        console.log('GIEmail Assert Subjects in DOM', JSON.stringify({\n            subject_assertions,\n            subjects_in_dom,\n            assertions,\n            result\n        }));\n        \n        return result;\n    }\n    let start = Date.now();\n    function recursiveCheck(){\n        let now = Date.now();\n        let passing = checkForEmails();\n        if(passing){\n            resolve(\"true\");\n        }else if(!passing && now - start < 59000){\n            setTimeout(()=>{\n                recursiveCheck();    \n            },500);\n        }else{\n            resolve(\"false\");\n        }\n    }\n    recursiveCheck();\n})",
+      "variableName": "giemail_all_subject_assertions_passing",
+      "notes": "// keeps checking for 60 seconds"
+    }
+  ],
+  "testFrequency": 0,
+  "testFrequencyAdvanced": [],
+  "viewportSize": null
+}
