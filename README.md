@@ -1,20 +1,30 @@
-# @jakedowns' Custom Ghost Inspector Helpers & Utility Scripts
+<a id="markdown-jakedowns-ghost-inspector-helper-scripts--importable-testing-utilities" name="jakedowns-ghost-inspector-helper-scripts--importable-testing-utilities"></a>
+# @jakedowns' Ghost Inspector Helper Scripts & Importable Testing Utilities
 
-Table of Contents:
+Here's a few of my Ghost Inspector Helper Scripts & Importable Testing Utilities someone else may find useful. I'll add more in the future. Follow me [@jakedowns on Twitter](https://twitter.com/jakedowns) for more info!
+
 <!-- TOC -->
 
-- [1. _Ghost Inspector wait for Emails to arrive in ___email.ghostinspector.com___ inbox_](#1-_ghost-inspector-wait-for-emails-to-arrive-in-___emailghostinspectorcom___-inbox_)
-    - [A. Definition of ___Importables - GIEmail Wait For Emails to Arrive With Subjects___:](#a-definition-of-___importables---giemail-wait-for-emails-to-arrive-with-subjects___)
-    - [B. Definition of ___Importables - GIEmail Assert Subjects in DOM___](#b-definition-of-___importables---giemail-assert-subjects-in-dom___)
-- [2. _Ghost Inspector Test Email Subject is present in __Mailtrap.io__ Inbox_](#2-_ghost-inspector-test-email-subject-is-present-in-__mailtrapio__-inbox_)
+- [@jakedowns' Ghost Inspector Helper Scripts & Importable Testing Utilities](#jakedowns-ghost-inspector-helper-scripts--importable-testing-utilities)
+    - [Importable Testing Utilities](#importable-testing-utilities)
+        - [1. _Ghost Inspector wait for Emails to arrive in ___email.ghostinspector.com___ inbox_](#1-_ghost-inspector-wait-for-emails-to-arrive-in-___emailghostinspectorcom___-inbox_)
+            - [A. Definition of ___Importables - GIEmail Wait For Emails to Arrive With Subjects___:](#a-definition-of-___importables---giemail-wait-for-emails-to-arrive-with-subjects___)
+            - [B. Definition of ___Importables - GIEmail Assert Subjects in DOM___](#b-definition-of-___importables---giemail-assert-subjects-in-dom___)
+        - [2. _Ghost Inspector Test Email Subject is present in __Mailtrap.io__ Inbox_](#2-_ghost-inspector-test-email-subject-is-present-in-__mailtrapio__-inbox_)
+    - [Helper Scripts](#helper-scripts)
+        - [1. _Python Script to backup all Ghost Inspector Suite Data (Exported as Zipped JSON data) and automatically push it to a github repo_](#1-_python-script-to-backup-all-ghost-inspector-suite-data-exported-as-zipped-json-data-and-automatically-push-it-to-a-github-repo_)
 
 <!-- /TOC -->
 
 ---
 
-## 1. _Ghost Inspector wait for Emails to arrive in ___email.ghostinspector.com___ inbox_
+<a id="markdown-importable-testing-utilities" name="importable-testing-utilities"></a>
+## Importable Testing Utilities
 
-This answers the questions:
+<a id="markdown-1-_ghost-inspector-wait-for-emails-to-arrive-in-___emailghostinspectorcom___-inbox_" name="1-_ghost-inspector-wait-for-emails-to-arrive-in-___emailghostinspectorcom___-inbox_"></a>
+### 1. _Ghost Inspector wait for Emails to arrive in ___email.ghostinspector.com___ inbox_
+
+This answers questions I had like:
 - What to do if my Ghost Inspector Test Fails because Emails haven't arrived yet? or Multiple Emails haven't all arrived yet?
 - How can I check for emails in a more performant manner than just adding arbitrary pauses into my Tests?
     Sometimes emails will arrive faster than other times, doesn't make sense to wait for a hard-coded amount of time each test run. How can we dynamically wait until *just* the exact moment (+/- some # of milliseconds) when the email arrives?
@@ -25,10 +35,13 @@ This answers the questions:
 
 **Original Usage:** In my experience, sometimes **Mailgun** can be slow to deliver emails to email.ghostinspector.com I kept having to add 30second pauses to my tests, and it seems like every now and then I'd still have tests failing. I knew sometimes emails were coming in faster than the lowest common denomentator and I didn't want to continue to extend the length of _every_ test run that interacted with emails (which is a large portion of my tests) so, I wrote this couplet of Importable Test modules which use Javascript Promises to loop & repeatedly check the mailbox index page for the presence of an Array of Subject Names. __It will only pass once all Subject Names Expected are delivered and present.__
 
-**Note:** this test intentionally DOES NOT check that emails arrive in a certain order since emails can arrive out of order for various reasons.
+> **Note:** this test intentionally DOES NOT check that emails arrive in a certain order since emails can arrive out of order for various reasons.
+
+> **Note:** you can import these tests from the **ImportableTestingUtilites** directory of this repo, but you'll still have to re-link the Import steps manually.
 
 ---
-### A. Definition of ___Importables - GIEmail Wait For Emails to Arrive With Subjects___:
+<a id="markdown-a-definition-of-___importables---giemail-wait-for-emails-to-arrive-with-subjects___" name="a-definition-of-___importables---giemail-wait-for-emails-to-arrive-with-subjects___"></a>
+#### A. Definition of ___Importables - GIEmail Wait For Emails to Arrive With Subjects___:
 ---
 > Step 1. MUST set a `giemail_assert_emails_arrived_with_subjects` variable that is an array of string subjects for us to check first! e.g. `['Email Subject 1', 'Email Subject 2']`
 1. **Javascript Returns True**
@@ -73,7 +86,8 @@ return "{{giemail_all_subject_assertions_passing}}" == "true"
 
 ---
 
-### B. Definition of ___Importables - GIEmail Assert Subjects in DOM___
+<a id="markdown-b-definition-of-___importables---giemail-assert-subjects-in-dom___" name="b-definition-of-___importables---giemail-assert-subjects-in-dom___"></a>
+#### B. Definition of ___Importables - GIEmail Assert Subjects in DOM___
 ---
 > *!!! Add this Condition for **ALL** of following of steps:*
 ```js
@@ -156,7 +170,8 @@ return new Promise((resolve,reject)=>{
 })
 ```
 ---
-## 2. _Ghost Inspector Test Email Subject is present in __Mailtrap.io__ Inbox_
+<a id="markdown-2-_ghost-inspector-test-email-subject-is-present-in-__mailtrapio__-inbox_" name="2-_ghost-inspector-test-email-subject-is-present-in-__mailtrapio__-inbox_"></a>
+### 2. _Ghost Inspector Test Email Subject is present in __Mailtrap.io__ Inbox_
 ---
 
 1. set a `mailtrap_assert_subject` to a string Subject you want to check has arrived
@@ -179,3 +194,11 @@ emails_array.map((v,k)=>{
 console.log("debug subject matches",JSON.stringify({subject_matches, searching:"{{mailtrap_assert_subject}}"}));
 return subject_matches.length > 0;
 ```
+---
+<a id="markdown-helper-scripts" name="helper-scripts"></a>
+## Helper Scripts
+<a id="markdown-1-_python-script-to-backup-all-ghost-inspector-suite-data-exported-as-zipped-json-data-and-automatically-push-it-to-a-github-repo_" name="1-_python-script-to-backup-all-ghost-inspector-suite-data-exported-as-zipped-json-data-and-automatically-push-it-to-a-github-repo_"></a>
+### 1. _Python Script to backup all Ghost Inspector Suite Data (Exported as Zipped JSON data) and automatically push it to a github repo_
+See the script in this repo: [backup-all-suites-to-git.py](https://github.com/jakedowns/ghost-inspector-helpers/blob/master/backup-all-suites-to-git.py)
+
+It downloads all of your GhostInspector Suites as zipped json files, then automatically commits and pushes to `master` branch of whatever Git Repository it is nestled within. You just need to find a way to trigger the script to run periodically. Or even better, a Chrome Extension which triggers it each time you hit Save on a Test's "Edit Steps" page (stay tuned for more on that)
