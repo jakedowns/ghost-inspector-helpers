@@ -1,26 +1,43 @@
-# [@jakedowns](twitter.com/jakedowns)' Custom Ghost Inspector Helpers & Utility Scripts
+# @jakedowns' Custom Ghost Inspector Helpers & Utility Scripts
 
+Table of Contents:
+<!-- TOC -->
 
-## ___1. What to do if my Ghost Inspector Test Fails because Emails haven't arrived yet? or Multiple Emails haven't all arrived yet?___
+- [1. _Ghost Inspector wait for Emails to arrive in ___email.ghostinspector.com___ inbox_](#1-_ghost-inspector-wait-for-emails-to-arrive-in-___emailghostinspectorcom___-inbox_)
+    - [A. Definition of ___Importables - GIEmail Wait For Emails to Arrive With Subjects___:](#a-definition-of-___importables---giemail-wait-for-emails-to-arrive-with-subjects___)
+    - [B. Definition of ___Importables - GIEmail Assert Subjects in DOM___](#b-definition-of-___importables---giemail-assert-subjects-in-dom___)
+- [2. _Ghost Inspector Test Email Subject is present in __Mailtrap.io__ Inbox_](#2-_ghost-inspector-test-email-subject-is-present-in-__mailtrapio__-inbox_)
+
+<!-- /TOC -->
+
 ---
 
-In my experience, sometimes Mailgun is slow to deliver emails to email.ghostinspector.com so I wrote this series of importable Test modules
-which use Javascript Promises to loop & repeatedly check the mailbox index page for the presence of an Array of Subject Names.
-It will only pass once all Subject Names Expected are present.
+## 1. _Ghost Inspector wait for Emails to arrive in ___email.ghostinspector.com___ inbox_
 
-**Note:** this test intentionall DOES NOT check that emails arrive in a certain order since emails can arrive out of order for various reasons.
+This answers the questions:
+- What to do if my Ghost Inspector Test Fails because Emails haven't arrived yet? or Multiple Emails haven't all arrived yet?
+- How can I check for emails in a more performant manner than just adding arbitrary pauses into my Tests?
+    Sometimes emails will arrive faster than other times, doesn't make sense to wait for a hard-coded amount of time each test run. How can we dynamically wait until *just* the exact moment (+/- some # of milliseconds) when the email arrives?
+- How can I create a loop that checks `mail.ghostinspector.com` inbox until my email arrives / all my expected emails arrive?
+- How can I uses Promises to dynamically extend the length of a Ghost Inspector test?
 
 ---
-### A. Definition of ___GIEmail Wait For Emails to Arrive With Subjects___:
+
+**Original Usage:** In my experience, sometimes **Mailgun** can be slow to deliver emails to email.ghostinspector.com I kept having to add 30second pauses to my tests, and it seems like every now and then I'd still have tests failing. I knew sometimes emails were coming in faster than the lowest common denomentator and I didn't want to continue to extend the length of _every_ test run that interacted with emails (which is a large portion of my tests) so, I wrote this couplet of Importable Test modules which use Javascript Promises to loop & repeatedly check the mailbox index page for the presence of an Array of Subject Names. __It will only pass once all Subject Names Expected are delivered and present.__
+
+**Note:** this test intentionally DOES NOT check that emails arrive in a certain order since emails can arrive out of order for various reasons.
+
 ---
-> Step 1. MUST set a `giemail_assert_emails_arrived_with_subjects` variable that is an array of string subjects for us to check first! e.g. ['Email Subject 1', 'Email Subject 2']
-1. Javascript Returns True
+### A. Definition of ___Importables - GIEmail Wait For Emails to Arrive With Subjects___:
+---
+> Step 1. MUST set a `giemail_assert_emails_arrived_with_subjects` variable that is an array of string subjects for us to check first! e.g. `['Email Subject 1', 'Email Subject 2']`
+1. **Javascript Returns True**
 ```js
 let subjects = {{giemail_assert_emails_arrived_with_subjects}};
 return subjects.length > 0;
 ```
 > Step 2. Lowercase the asserted subject names for easier matching. **Omit this if you want your test to be case-sensitive**
-2. Extract From Javascript `giemail_assert_emails_arrived_with_subjects` =
+2. **Extract From Javascript** `giemail_assert_emails_arrived_with_subjects` =
 ```js
 let subjects = {{giemail_assert_emails_arrived_with_subjects}};
 subjects = subjects.map(function(v){
@@ -28,21 +45,19 @@ subjects = subjects.map(function(v){
 });
 return subjects;
 ```
-3. Go to URL `http://email.ghostinspector.com/{{userEmail}}`
-4. Set Variable `giemail_all_subject_assertions_passing` = `false` # completion flag
-5. Set Variable `time_to_email_start` = `{{timestamp}}` # for time-tracking
+3. **Go to URL** `http://email.ghostinspector.com/{{userEmail}}`
+4. **Set Variable** `giemail_all_subject_assertions_passing` = `false` # completion flag
+5. **Set Variable** `time_to_email_start` = `{{timestamp}}` # for time-tracking
 > Step 6.
 >
-> repeat this one for as long as you need. by default each import will check every 500ms for 60s
+> repeat this one for as long as you need. by default each import will check every 500ms for the max per-step execution time: **60s**
 >
-> keep in mind the max Test execution time for GI Tests is hard-limited to 10 minutes.
+> keep in mind the max Test execution time for GI **Tests are hard-limited to 10 minutes**.
 >
 > In my case I've added 3 instances so it checks for up to 3 minutes
->
-> ---
-7. (8. & 9.) Import Steps From `Importables - GIEmail Assert Subjects in DOM`  # see definition `B.` below
+1. (8. & 9.) **Import Steps From** `Importables - GIEmail Assert Subjects in DOM`  # see definition `B.` below
 > Step 10. Time tracking report if you're interested
-10. Execute Javascript
+10. **Execute Javascript**
 ```js
 console.log("time to email end " + ({{timestamp}} - {{time_to_email_start}}));
 ```
@@ -51,7 +66,7 @@ console.log("time to email end " + ({{timestamp}} - {{time_to_email_start}}));
 return "{{giemail_all_subject_assertions_passing}}" == "true"
 ```
 > Step 11. Assert all subjects were found and flag the test as passing! :D
-11. Javascript Returns True
+11. **Javascript Returns True**
 ```js
 return "{{giemail_all_subject_assertions_passing}}" == "true"
 ```
@@ -66,9 +81,9 @@ return "{{giemail_all_subject_assertions_passing}}" !== "true"; /* only check su
 ```
 
 > Step 1. Could alter this delay as you see fit... it could also just be removed
-1. Pause `3000`
-1. Refresh # refresh the mailbox index page
-1. Extract from Javascript `subjects_in_dom` =
+1. **Pause** `3000`
+1. **Refresh** # refresh the mailbox index page
+1. **Extract from Javascript** `subjects_in_dom` =
 ```js
 var subjects_in_dom = Array.from(document.getElementsByClassName('subject')).map(function(v){
     return v.textContent.toLowerCase(); // remove this bit, or make it conditional based on a variable if you want case-sensitive matching
@@ -81,7 +96,7 @@ try{
 return subjects_in_dom || [];
 ```
 > Step. 4 keeps checking every 500ms for 60s. alter as you see fit.
-4. Extract from Javascript `giemail_all_subject_assertions_passing` =
+4. **Extract from Javascript** `giemail_all_subject_assertions_passing` =
 ```js
 return new Promise((resolve,reject)=>{
     function checkForEmails(){
@@ -139,4 +154,28 @@ return new Promise((resolve,reject)=>{
     }
     recursiveCheck();
 })
+```
+---
+## 2. _Ghost Inspector Test Email Subject is present in __Mailtrap.io__ Inbox_
+---
+
+1. set a `mailtrap_assert_subject` to a string Subject you want to check has arrived
+2. directly execute or import the following implementation:
+- NOTE: this could be adapted to use the repeatable Promise-based looping approach above, it could also be adapted to check for an array of subjects rather than just a single string.
+
+---
+- Step 1. **Go to URL** `https://mailtrap.io/api/v1/inboxes/{{inboxId}}/messages?search={{userEmail}}&api_token={{mailtrapAPI_Token}}`
+- Step 2. **Javascript returns True**
+```js
+let emails_array = JSON.parse(document.body.innerText);
+console.log('debug emails array ' + document.body.innerText);
+let subject_matches = [];
+emails_array.map((v,k)=>{
+    console.log("debug compare subject", v.subject);
+	if(v.subject.toLowerCase().indexOf("{{mailtrap_assert_subject}}".toLowerCase()) > -1){
+		subject_matches.push(k);
+	}
+});
+console.log("debug subject matches",JSON.stringify({subject_matches, searching:"{{mailtrap_assert_subject}}"}));
+return subject_matches.length > 0;
 ```
