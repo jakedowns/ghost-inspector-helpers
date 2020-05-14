@@ -1,11 +1,11 @@
-<a id="markdown-jakedowns-ghost-inspector-helper-scripts--importable-testing-utilities" name="jakedowns-ghost-inspector-helper-scripts--importable-testing-utilities"></a>
-# @jakedowns' Ghost Inspector Helper Scripts & Importable Testing Utilities
+<a id="markdown-ghost-inspector-helper-scripts--importable-testing-utilities" name="ghost-inspector-helper-scripts--importable-testing-utilities"></a>
+# Ghost Inspector Helper Scripts & Importable Testing Utilities
 
 Here's a few of my Ghost Inspector Helper Scripts & Importable Testing Utilities someone else may find useful. I'll add more in the future. Follow me [@jakedowns on Twitter](https://twitter.com/jakedowns) for more info!
 
 <!-- TOC -->
 
-- [@jakedowns' Ghost Inspector Helper Scripts & Importable Testing Utilities](#jakedowns-ghost-inspector-helper-scripts--importable-testing-utilities)
+- [Ghost Inspector Helper Scripts & Importable Testing Utilities](#ghost-inspector-helper-scripts--importable-testing-utilities)
     - [Importable Testing Utilities](#importable-testing-utilities)
         - [1. _Ghost Inspector wait for Emails to arrive in ___email.ghostinspector.com___ inbox_](#1-_ghost-inspector-wait-for-emails-to-arrive-in-___emailghostinspectorcom___-inbox_)
             - [A. Definition of ___Importables - GIEmail Wait For Emails to Arrive With Subjects___:](#a-definition-of-___importables---giemail-wait-for-emails-to-arrive-with-subjects___)
