@@ -1,13 +1,14 @@
+# Ghostinspector API
+GI_API_KEY = "XXX"
+GIT_AUTHOR = 'Utility Server <utility-server@domain.com>'
+
 import requests
 import os
 import pathlib
 from multiprocessing.pool import ThreadPool
 import git
 import zipfile
-
-# Ghostinspector API
-GI_API_KEY = "XXX"
-GIT_AUTHOR = 'Utility Server <utility-server@domain.com>'
+import json
 
 """
 Url: https://gist.github.com/wassname/1393c4a57cfcbf03641dbc31886123b8
@@ -76,13 +77,27 @@ def backup_suite(s):
 results = ThreadPool(8).imap_unordered(backup_suite, list_suites_resp.json()['data'])
 for zname in results:
     with zipfile.ZipFile(zname,"r") as zip_ref:
-        zip_ref.extractall(os.path.join(BACKUPS_DIR,str.replace(zname,'.zip','')))
+        OUTPUT_DIR = os.path.join(BACKUPS_DIR,str.replace(zname,'.zip',''))
+        zip_ref.extractall(OUTPUT_DIR)
         zip_ref.close()
+        json_files = [pos_json for pos_json in os.listdir(OUTPUT_DIR) if pos_json.endswith('.json')]
+        for file in json_files:
+            ss = ''
+            with open('data.json', 'r') as f:
+                for line in f:
+                    ss += ''.join(line.strip())
+            data = json.loads(ss.decode("utf-8","replace"))
+    # delete .zip
     os.remove(zname)
+
 
 #repo.index.add(add_names)
 repo.index.add(BACKUPS_DIR)
 repo.index.add('backup.py') # add THIS script! :D :P
-_git.commit('-m', 'GhostInspector Automated Backup', author=GIT_AUTHOR)
-_git.push('origin', 'master')
-print("success")
+try:
+    _git.commit('-m', 'GhostInspector Automated Backup', author=GIT_AUTHOR)
+    _git.push('origin', 'master')
+except Exception as e:
+    print(f"warning - {e}")
+else:
+    print("success")
