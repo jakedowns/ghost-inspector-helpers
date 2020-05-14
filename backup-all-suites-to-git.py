@@ -27,6 +27,8 @@ def clean_filename(filename, whitelist=valid_filename_chars, replace=' '):
     # keep only valid ascii chars
     cleaned_filename = unicodedata.normalize('NFKD', filename).encode('ASCII', 'ignore').decode()
 
+    cleaned_filename = cleaned_filename.replace('.','_')
+
     # keep only whitelisted chars
     cleaned_filename = ''.join(c for c in cleaned_filename if c in whitelist)
     if len(cleaned_filename)>char_limit:
@@ -57,7 +59,11 @@ if not os.path.exists(BACKUPS_DIR):
 try:
     existing = listdir_nohidden(BACKUPS_DIR)
     if len(existing):
-        repo.index.remove(existing,working_tree = True)
+        for ex in existing:
+            try:
+                repo.index.remove([os.path.join(BACKUPS_DIR,ex)],working_tree = True,r=True)
+            except Exception as e:
+                print(e)
 except Exception as e:
     print(f"warning {e}")
 
@@ -76,17 +82,26 @@ def backup_suite(s):
 
 results = ThreadPool(8).imap_unordered(backup_suite, list_suites_resp.json()['data'])
 for zname in results:
+    OUTPUT_DIR = os.path.join(BACKUPS_DIR,str.replace(zname,'.zip',''))
+
     with zipfile.ZipFile(zname,"r") as zip_ref:
-        OUTPUT_DIR = os.path.join(BACKUPS_DIR,str.replace(zname,'.zip',''))
+        print(f"unzipping {zname} to {OUTPUT_DIR}")
         zip_ref.extractall(OUTPUT_DIR)
         zip_ref.close()
+
+    try:
         json_files = [pos_json for pos_json in os.listdir(OUTPUT_DIR) if pos_json.endswith('.json')]
-        for file in json_files:
+        for json_file in json_files:
             ss = ''
-            with open('data.json', 'r') as f:
+            JSON_FILE = os.path.join(OUTPUT_DIR,json_file)
+            with open(JSON_FILE, 'r') as f:
                 for line in f:
                     ss += ''.join(line.strip())
-            data = json.loads(ss.decode("utf-8","replace"))
+            data = json.loads(ss)
+            with open(JSON_FILE, 'w') as outfile:
+                json.dump(data, outfile, sort_keys=False, indent=4)
+    except Exception as e:
+        print(e)
     # delete .zip
     os.remove(zname)
 
@@ -97,6 +112,7 @@ repo.index.add('backup.py') # add THIS script! :D :P
 try:
     _git.commit('-m', 'GhostInspector Automated Backup', author=GIT_AUTHOR)
     _git.push('origin', 'master')
+    pass
 except Exception as e:
     print(f"warning - {e}")
 else:
