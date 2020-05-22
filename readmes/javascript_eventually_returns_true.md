@@ -2,18 +2,18 @@
 
 Ghost Inspector Helper that continually executes a bit of javascript until it returns true (Asyncronous Javascript Promise Resolves `true`) or time runs out. Default Checker Interval / Frequency is 100ms, but you can customize it. Just define a variable named `javascript_eventually_returns_true` to a bit of Javascript (that MUST end with a `return` statement) then Import this helper to proceed once it passes as true
 
-## Usage
+## Usage:
 
 ### Step 1: 
 - `SetVariable` `javascript_eventually_returns_true` =
 > Note this can be whatever as long as it's valid Javascript (ES6 allowed) and ends with a valid `return` statement.
 
-Here's an example though which returns True once the element(s) are in the DOM:
+Here's an example taken from [readmes/wait_for_element_selector.md](https://github.com/jakedowns/ghost-inspector-helpers/blob/master/readmes/wait_for_element_selector.md) which returns True once the element(s) are in the DOM:
 ```@javascript
 return document.querySelectorAll('{{wait_for_element_selector}}')
 ```
 
-## Definitions
+## Test Definitions:
 
 ### A. Importables - javascript_eventually_returns_true
 
