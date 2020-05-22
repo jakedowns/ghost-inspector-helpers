@@ -67,6 +67,8 @@ Here are the full definitions of each of these Importable Test Helpers:
 ### A. Definition of ___Importables - GIEmail Wait For Emails to Arrive With Subjects___:
 
 > Step 1. MUST set a `giemail_assert_emails_arrived_with_subjects` variable that is an array of string subjects for us to check first! e.g. `['Email Subject 1', 'Email Subject 2']`
+>
+> Step 1b. MUST set a `userEmail` variable to define which email inbox will be checked
 1. **Javascript Returns True**
 ```js
 let subjects = {{giemail_assert_emails_arrived_with_subjects}};
