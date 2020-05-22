@@ -14,11 +14,11 @@ For Example, we use this script in order to re-use a single Suite of tests, and 
 
 - Conditional `Execute steps when JavaScript returns true:`:
 
-```@javascript
+```javascript
 return "{{shared_test_setup_completed}}" !== "true"
 ```
 
-```@javascript
+```javascript
 let startUrl = "{{startUrl}}";
 if(typeof(startUrl) == "undefined" || startUrl === "about:blank"){
     startUrl = "{{myStartUrl}}";
@@ -100,7 +100,7 @@ For each of the variables you want to expose you'll need to:
 
 - Conditionally: (Same Conditional as Step. 1)
 - `Extract From Javascript`: `YOUR_ENVVAR_NAME` =  
-```@javascript
+```javascript
 const config = {{config}}
 return config.my_envvar_name;
 ```

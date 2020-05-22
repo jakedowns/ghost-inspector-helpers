@@ -9,7 +9,7 @@ Ghost Inspector Helper that continually executes a bit of javascript until it re
 > Note this can be whatever as long as it's valid Javascript (ES6 allowed) and ends with a valid `return` statement.
 
 Here's an example taken from [readmes/wait_for_element_selector.md](https://github.com/jakedowns/ghost-inspector-helpers/blob/master/readmes/wait_for_element_selector.md) which returns True once the element(s) are in the DOM:
-```@javascript
+```javascript
 return document.querySelectorAll('{{wait_for_element_selector}}')
 ```
 
@@ -26,7 +26,7 @@ Set Variable `javascript_eventually_returned_true` = `false`
 #### Step 2. => 11.
 
 Given:
-```@javascript
+```javascript
 /* Ghost Inspector Hard Limits */
 max_element_timeout = 60s /* aka. max_step_time Configured in Settings > Step Timing > Element Timeout */
 max_test_execution_time = 10m /* hard max limit; not configurable */
@@ -43,7 +43,7 @@ max_test_execution_time = 10m /* hard max limit; not configurable */
 **Assert** that it did indeed finally resolve as true
 
 `Javscript Returns True`:
-```@javascript
+```javascript
 return "{{javascript_eventually_returned_true}}" === "true";
 ```
 
@@ -52,13 +52,13 @@ return "{{javascript_eventually_returned_true}}" === "true";
 #### Step. 1
 
 Conditionally:
-```@javascript
+```javascript
 let passing = "{{javascript_eventually_returned_true}}";
 return !passing.trim().length || passing !== "true"; /* javascript_eventually_returned_true */
 ```
 
 Extract From Javascript:
-```@javascript
+```javascript
 const sleep = m => new Promise(r => setTimeout(r, m))
 let start = performance.now();
 const MAX = 59000;

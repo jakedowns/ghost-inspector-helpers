@@ -1,5 +1,5 @@
 ## A. wait_for_element_selector to be present
-```@javascript
+```javascript
 max_element_timeout = 60s /* max step time */
 max_test_execution_time = 10m
 ```
@@ -14,11 +14,11 @@ Step 1. => 10.
 
 ### Step 1.    
 - Conditionally:
-```@javascript
+```javascript
 return "{{wait_for_element_resolved}}" !== "true"
 ```
 - `Javascript Returns True` =
-```@javascript
+```javascript
 return "{{wait_for_element_selector}}".trim().length > 0;
 ```
 
