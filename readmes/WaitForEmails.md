@@ -7,6 +7,8 @@
 - Test Definitions:
     - [A. Definition of ___Importables - GIEmail Wait For Emails to Arrive With Subjects___:](#a-definition-of-___importables---giemail-wait-for-emails-to-arrive-with-subjects___)
     - [B. Definition of ___Importables - GIEmail Assert Subjects in DOM___](#b-definition-of-___importables---giemail-assert-subjects-in-dom___)
+    - C\. Definition of Importables - giemail_wait_for_email_to_arrive_with_subject And Open It
+    - D\. Definition of Importables - GIEmail click_email_subject view full message
 
 ## About
 
