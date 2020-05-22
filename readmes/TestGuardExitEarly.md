@@ -6,7 +6,7 @@ A small ghost inspector test helper that will allow you to "Guard" a test shared
 
 ### Step. 1:
 - Conditionally ` Execute steps when JavaScript returns true:` =
-```
+```javascript
 /* returns true when we're NOT at a whitelisted url for the parent test indicating we should soft exit early */
 return window.location.href.indexOf("{{guard_url_must_contain}}") === -1;
 ```
