@@ -23,16 +23,12 @@ Gists:
 ## Importable Testing Utilities
 
 <a id="markdown-1-_ghost-inspector-wait-for-emails-to-arrive-in-___emailghostinspectorcom___-inbox_" name="1-_ghost-inspector-wait-for-emails-to-arrive-in-___emailghostinspectorcom___-inbox_"></a>
-### 1. _Ghost Inspector wait for Emails to arrive in ___email.ghostinspector.com___ inbox_
+### 1. _Ghost Inspector Email Service wait for Emails to arrive in ___email.ghostinspector.com___ inbox_
+View Readme: [WaitForEmails.md](https://github.com/jakedowns/ghost-inspector-helpers/blob/master/WaitForEmails.md)
 
-> Read More Here: [WaitForEmails.md](https://github.com/jakedowns/ghost-inspector-helpers/blob/master/WaitForEmails.md)
-
----
 <a id="markdown-2-_ghost-inspector-test-email-subject-is-present-in-__mailtrapio__-inbox_" name="2-_ghost-inspector-test-email-subject-is-present-in-__mailtrapio__-inbox_"></a>
 ### 2. _Ghost Inspector Test Email Subject is present in __Mailtrap.io__ Inbox_
----
-
-> Read More Here: [WaitForEmailMailtrap_io.md](https://github.com/jakedowns/ghost-inspector-helpers/blob/master/WaitForEmailMailtrap_io.md)
+View Readme: [WaitForEmailMailtrap_io.md](https://github.com/jakedowns/ghost-inspector-helpers/blob/master/WaitForEmailMailtrap_io.md)
 
 ---
 <a id="markdown-helper-scripts" name="helper-scripts"></a>
