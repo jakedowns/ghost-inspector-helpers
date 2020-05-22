@@ -15,6 +15,9 @@ This answers questions I had like:
 
 > **Note:** you can import these tests from the **ImportableTestingUtilites** directory of this repo, but you'll still have to re-link the Import steps manually.
 
+- [A. Definition of ___Importables - GIEmail Wait For Emails to Arrive With Subjects___:](#a-definition-of-___importables---giemail-wait-for-emails-to-arrive-with-subjects___)
+- [B. Definition of ___Importables - GIEmail Assert Subjects in DOM___](#b-definition-of-___importables---giemail-assert-subjects-in-dom___)
+
 ---
 <a id="markdown-a-definition-of-___importables---giemail-wait-for-emails-to-arrive-with-subjects___" name="a-definition-of-___importables---giemail-wait-for-emails-to-arrive-with-subjects___"></a>
 #### A. Definition of ___Importables - GIEmail Wait For Emails to Arrive With Subjects___:
