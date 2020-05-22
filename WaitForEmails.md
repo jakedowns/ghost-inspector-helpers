@@ -1,4 +1,4 @@
-### 1. _Ghost Inspector wait for Emails to arrive in ___email.ghostinspector.com___ inbox_
+# _Ghost Inspector Mail Service wait for Emails to arrive in ___email.ghostinspector.com___ inbox_
 
 This answers questions I had like:
 - What to do if my Ghost Inspector Test Fails because Emails haven't arrived yet? or Multiple Emails haven't all arrived yet?
