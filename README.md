@@ -34,7 +34,7 @@ Gists:
 ### 2. _Ghost Inspector Test Email Subject is present in __Mailtrap.io__ Inbox_
 ---
 
-> Read More Here: []()
+> Read More Here: [WaitForEmailMailtrap_io.md](https://github.com/jakedowns/ghost-inspector-helpers/blob/master/WaitForEmailMailtrap_io.md)
 
 ---
 <a id="markdown-helper-scripts" name="helper-scripts"></a>
