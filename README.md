@@ -11,6 +11,8 @@ Here's a few of my Ghost Inspector Helper Scripts & Importable Testing Utilities
         - [2. _Ghost Inspector Test Email Subject is present in __Mailtrap.io__ Inbox_](#2-_ghost-inspector-test-email-subject-is-present-in-__mailtrapio__-inbox_)
         - [3. Javascript Eventually Returns True]()
         - [4. wait_for_element_selector to be present]()
+        - [5. Test Guard (Exit Early)]()
+        - [6. Setup Shared Test]()
     - [Helper Scripts](#helper-scripts)
         - [1. _Python Script to backup all Ghost Inspector Suite Data (Exported as Zipped JSON data) and automatically push it to a github repo_](#1-_python-script-to-backup-all-ghost-inspector-suite-data-exported-as-zipped-json-data-and-automatically-push-it-to-a-github-repo_)
 
@@ -55,6 +57,12 @@ View Readme: [readmes/wait_for_element_selector.md](https://github.com/jakedowns
 A small ghost inspector test helper that will allow you to "Guard" a test shared between multiple environments, that will only execute if the current url matches a specific sub string, otherwise the text will Exit early with a Passing status.
 
 View Readme: [readmes/TestGuardExitEarly.md](https://github.com/jakedowns/ghost-inspector-helpers/blob/master/readmes/TestGuardExitEarly.md)
+
+### 6. Setup Shared Test - Custom Environment-based variables ENVVARS depending on startUrl
+
+A small ghost inspector test helper that one can include at the top of each in a suite of shared tests, it sets up an object full of environemnt variables and then exposes them for other tests to use. It is conditional and idempotent (knows to only execute once), just in case it gets included multiple times
+
+View Readme: [readmes/SetupSharedTest.md](https://github.com/jakedowns/ghost-inspector-helpers/blob/master/readmes/SetupSharedTest.md)
 
 ---
 <a id="markdown-helper-scripts" name="helper-scripts"></a>
