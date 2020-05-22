@@ -1,0 +1,68 @@
+{
+    "autoRetry": null,
+    "browser": null,
+    "disableVisuals": null,
+    "disallowInsecureCertificates": null,
+    "failOnJavaScriptError": null,
+    "filters": [],
+    "finalDelay": null,
+    "globalStepDelay": null,
+    "httpHeaders": [],
+    "language": null,
+    "links": [],
+    "maxAjaxDelay": null,
+    "maxConcurrentDataRows": null,
+    "maxWaitDelay": null,
+    "name": "giemail_wait_for_email_to_arrive_with_subject And Open It",
+    "notifications": null,
+    "publicStatusEnabled": false,
+    "region": null,
+    "screenshotCompareEnabled": null,
+    "screenshotCompareThreshold": 0.1,
+    "startUrl": null,
+    "steps": [
+        {
+            "condition": null,
+            "optional": false,
+            "private": false,
+            "sequence": 0,
+            "command": "store",
+            "target": "",
+            "value": "['{{giemail_wait_for_email_to_arrive_with_subject}}']",
+            "variableName": "giemail_assert_emails_arrived_with_subjects"
+        },
+        {
+            "condition": null,
+            "optional": false,
+            "private": false,
+            "sequence": 1,
+            "command": "execute",
+            "target": "",
+            "value": "5ea9ca84d84e437e6a58ca45",
+            "variableName": ""
+        },
+        {
+            "condition": null,
+            "optional": false,
+            "private": false,
+            "sequence": 2,
+            "command": "store",
+            "target": "",
+            "value": "{{giemail_wait_for_email_to_arrive_with_subject}}",
+            "variableName": "click_email_subject"
+        },
+        {
+            "condition": null,
+            "optional": false,
+            "private": false,
+            "sequence": 3,
+            "command": "execute",
+            "target": "",
+            "value": "5ec6d8b9a6f65371c4b904f3",
+            "variableName": ""
+        }
+    ],
+    "testFrequency": 0,
+    "testFrequencyAdvanced": [],
+    "viewportSize": null
+}

@@ -1,0 +1,55 @@
+{
+    "autoRetry": null,
+    "browser": null,
+    "disableVisuals": null,
+    "disallowInsecureCertificates": null,
+    "failOnJavaScriptError": null,
+    "filters": [],
+    "finalDelay": null,
+    "globalStepDelay": null,
+    "httpHeaders": [],
+    "language": null,
+    "links": [],
+    "maxAjaxDelay": null,
+    "maxConcurrentDataRows": null,
+    "maxWaitDelay": null,
+    "name": "wait_for_element_selector to be present (60s step)",
+    "notifications": {},
+    "publicStatusEnabled": false,
+    "region": null,
+    "screenshotCompareEnabled": null,
+    "screenshotCompareThreshold": 0.1,
+    "startUrl": null,
+    "steps": [
+        {
+            "condition": {
+                "statement": "return \"{{wait_for_element_resolved}}\" !== \"true\"",
+                "result": false
+            },
+            "optional": false,
+            "private": false,
+            "sequence": 0,
+            "command": "assertEval",
+            "target": "",
+            "value": "return \"{{wait_for_element_selector}}\".trim().length > 0;",
+            "variableName": "",
+            "notes": "wait_for_element_selector required"
+        },
+        {
+            "condition": {
+                "statement": "return \"{{wait_for_element_resolved}}\" !== \"true\"",
+                "result": false
+            },
+            "optional": false,
+            "private": false,
+            "sequence": 1,
+            "command": "extractEval",
+            "target": "",
+            "value": "const selector = \"{{wait_for_element_selector}}\"\r\nlet start = performance.now();\r\nconst MAX = 59000;\r\nreturn new Promise(async (resolve,reject)=>{\r\n    let check = async function(){\r\n    \tlet selected = $(selector);\r\n    \tif(selected.length>0){\r\n    \t\tresolve(selected.length);\r\n    \t}else if(performance.now() - start >= MAX){\r\n    \t\t//reject(\"failed to locate \".selector);\r\n    \t\tresolve(false);\r\n    \t}else{\r\n    \t\tawait sleep(100)\r\n    \t\tawait check();\r\n    \t}\r\n    }\r\n    await check();\r\n});",
+            "variableName": "wait_for_element_resolved"
+        }
+    ],
+    "testFrequency": 0,
+    "testFrequencyAdvanced": [],
+    "viewportSize": null
+}

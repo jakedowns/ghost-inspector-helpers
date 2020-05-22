@@ -9,6 +9,7 @@ from multiprocessing.pool import ThreadPool
 import git
 import zipfile
 import json
+import re
 
 """
 Url: https://gist.github.com/wassname/1393c4a57cfcbf03641dbc31886123b8
@@ -21,13 +22,26 @@ char_limit = 255
 
 def clean_filename(filename, whitelist=valid_filename_chars, replace=' '):
     # replace spaces
-    for r in replace:
-        filename = filename.replace(r,'_')
+    # for r in replace:
+    #     filename = filename.replace(r,'_')
+
+    # whitespace
+    cleaned_filename = re.sub(' +', '_', filename)
+
+    # rm parens
+    table = str.maketrans(dict.fromkeys("()"))
+    cleaned_filename = cleaned_filename.translate(table)# = re.sub(r" ?\([^)]+\)", "", cleaned_filename)
 
     # keep only valid ascii chars
     cleaned_filename = unicodedata.normalize('NFKD', filename).encode('ASCII', 'ignore').decode()
 
+    # dots to _
     cleaned_filename = cleaned_filename.replace('.','_')
+
+    # alpha numeric and underscores only
+    cleaned_filename = re.sub(r'[^A-Za-z0-9_]+', '', cleaned_filename)
+
+    # double _ to single?
 
     # keep only whitelisted chars
     cleaned_filename = ''.join(c for c in cleaned_filename if c in whitelist)
@@ -71,7 +85,7 @@ list_suites_resp = requests.get(f"https://api.ghostinspector.com/v1/suites/?apiK
 
 def backup_suite(s):
     resp = requests.get(f"https://api.ghostinspector.com/v1/suites/{s['_id']}/export/json/?apiKey={GI_API_KEY}", stream=True)
-    name = f"{s['_id']}-{s['name']}"
+    name = f"{s['_id']}_{s['name']}"
     name = clean_filename(name)
     zname = os.path.join(BACKUPS_DIR,f"{name}.zip")
     zfile = open(zname, 'wb')
@@ -100,6 +114,12 @@ for zname in results:
             data = json.loads(ss)
             with open(JSON_FILE, 'w') as outfile:
                 json.dump(data, outfile, sort_keys=False, indent=4)
+            cleaned_name = f"{clean_filename(json_file.rsplit('.',1)[0])}.json"
+            #print(json_file,cleaned_name)
+            os.rename(
+                JSON_FILE,
+                os.path.join(OUTPUT_DIR,cleaned_name)
+            )
     except Exception as e:
         print(e)
     # delete .zip
@@ -110,6 +130,7 @@ for zname in results:
 repo.index.add(BACKUPS_DIR)
 repo.index.add('backup.py') # add THIS script! :D :P
 try:
+    print(_git.status())
     _git.commit('-m', 'GhostInspector Automated Backup', author=GIT_AUTHOR)
     _git.push('origin', 'master')
     pass

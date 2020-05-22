@@ -1,0 +1,38 @@
+{
+    "autoRetry": null,
+    "browser": null,
+    "disableVisuals": null,
+    "disallowInsecureCertificates": null,
+    "failOnJavaScriptError": null,
+    "filters": [],
+    "finalDelay": null,
+    "globalStepDelay": null,
+    "httpHeaders": [],
+    "language": null,
+    "links": [],
+    "maxAjaxDelay": null,
+    "maxConcurrentDataRows": null,
+    "maxWaitDelay": null,
+    "name": "GIEmail click_email_subject view full message",
+    "notifications": null,
+    "publicStatusEnabled": false,
+    "region": null,
+    "screenshotCompareEnabled": null,
+    "screenshotCompareThreshold": 0.1,
+    "startUrl": null,
+    "steps": [
+        {
+            "condition": null,
+            "optional": false,
+            "private": false,
+            "sequence": 0,
+            "command": "click",
+            "target": "xpath=//td[@class=\"subject\"]//a[contains(normalize-space(),\"{{click_email_subject}}\")]",
+            "value": "",
+            "variableName": ""
+        }
+    ],
+    "testFrequency": 0,
+    "testFrequencyAdvanced": [],
+    "viewportSize": null
+}

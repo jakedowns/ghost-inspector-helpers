@@ -1,0 +1,128 @@
+{
+    "autoRetry": null,
+    "browser": null,
+    "disableVisuals": null,
+    "disallowInsecureCertificates": null,
+    "failOnJavaScriptError": null,
+    "filters": [],
+    "finalDelay": null,
+    "globalStepDelay": null,
+    "httpHeaders": [],
+    "language": null,
+    "links": [],
+    "maxAjaxDelay": null,
+    "maxConcurrentDataRows": null,
+    "maxWaitDelay": null,
+    "name": "wait_for_element_selector to be present",
+    "notifications": {},
+    "publicStatusEnabled": false,
+    "region": null,
+    "screenshotCompareEnabled": null,
+    "screenshotCompareThreshold": 0.1,
+    "startUrl": null,
+    "steps": [
+        {
+            "condition": null,
+            "optional": false,
+            "private": false,
+            "sequence": 0,
+            "command": "execute",
+            "target": "",
+            "value": "5ec5633396a5c65f94daf1de",
+            "variableName": ""
+        },
+        {
+            "condition": null,
+            "optional": false,
+            "private": false,
+            "sequence": 1,
+            "command": "execute",
+            "target": "",
+            "value": "5ec5633396a5c65f94daf1de",
+            "variableName": ""
+        },
+        {
+            "condition": null,
+            "optional": false,
+            "private": false,
+            "sequence": 2,
+            "command": "execute",
+            "target": "",
+            "value": "5ec5633396a5c65f94daf1de",
+            "variableName": ""
+        },
+        {
+            "condition": null,
+            "optional": false,
+            "private": false,
+            "sequence": 3,
+            "command": "execute",
+            "target": "",
+            "value": "5ec5633396a5c65f94daf1de",
+            "variableName": ""
+        },
+        {
+            "condition": null,
+            "optional": false,
+            "private": false,
+            "sequence": 4,
+            "command": "execute",
+            "target": "",
+            "value": "5ec5633396a5c65f94daf1de",
+            "variableName": ""
+        },
+        {
+            "condition": null,
+            "optional": false,
+            "private": false,
+            "sequence": 5,
+            "command": "execute",
+            "target": "",
+            "value": "5ec5633396a5c65f94daf1de",
+            "variableName": ""
+        },
+        {
+            "condition": null,
+            "optional": false,
+            "private": false,
+            "sequence": 6,
+            "command": "execute",
+            "target": "",
+            "value": "5ec5633396a5c65f94daf1de",
+            "variableName": ""
+        },
+        {
+            "condition": null,
+            "optional": false,
+            "private": false,
+            "sequence": 7,
+            "command": "execute",
+            "target": "",
+            "value": "5ec5633396a5c65f94daf1de",
+            "variableName": ""
+        },
+        {
+            "condition": null,
+            "optional": false,
+            "private": false,
+            "sequence": 8,
+            "command": "execute",
+            "target": "",
+            "value": "5ec5633396a5c65f94daf1de",
+            "variableName": ""
+        },
+        {
+            "condition": null,
+            "optional": false,
+            "private": false,
+            "sequence": 9,
+            "command": "execute",
+            "target": "",
+            "value": "5ec5633396a5c65f94daf1de",
+            "variableName": ""
+        }
+    ],
+    "testFrequency": 0,
+    "testFrequencyAdvanced": [],
+    "viewportSize": null
+}
