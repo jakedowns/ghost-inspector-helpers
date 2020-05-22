@@ -15,7 +15,7 @@ Here's a few of my Ghost Inspector Helper Scripts & Importable Testing Utilities
 <!-- /TOC -->
 
 Gists:
-[Example of How to Programmatically Update EasyMDE/CodeMirror/Simple Editor Input Value for Integration & Acceptance Testing](https://gist.github.com/jakedowns/b3f9a90de1182af083024e037e3ac42f)
+- [Example of How to Programmatically Update EasyMDE/CodeMirror/Simple Editor Input Value for Integration & Acceptance Testing](https://gist.github.com/jakedowns/b3f9a90de1182af083024e037e3ac42f)
 
 ---
 
