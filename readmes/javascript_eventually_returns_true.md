@@ -1,6 +1,6 @@
 # javascript_eventually_returns_true
 
-Ghost Inpector Helper that continually executes a bit of javascript until it returns true (Asyncronous Javascript Promise Resolves `true`) or time runs out. Default Checker Interval / Frequency is 100ms, but you can customize it. Just define a variable named `javascript_eventually_returns_true` to a bit of Javascript (that MUST start with a `return` statement) then Import this helper to proceed once it passes as true
+Ghost Inspector Helper that continually executes a bit of javascript until it returns true (Asyncronous Javascript Promise Resolves `true`) or time runs out. Default Checker Interval / Frequency is 100ms, but you can customize it. Just define a variable named `javascript_eventually_returns_true` to a bit of Javascript (that MUST start with a `return` statement) then Import this helper to proceed once it passes as true
 
 ```@javascript
 /* Ghost Inspector Hard Limits */
