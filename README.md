@@ -1,4 +1,3 @@
-<a id="markdown-ghost-inspector-helper-scripts--importable-testing-utilities" name="ghost-inspector-helper-scripts--importable-testing-utilities"></a>
 # Ghost Inspector Helper Scripts & Importable Testing Utilities
 
 Here's a few of my Ghost Inspector Helper Scripts & Importable Testing Utilities someone else may find useful. I'll add more in the future. Follow me [@jakedowns on Twitter](https://twitter.com/jakedowns) for more info!
@@ -6,34 +5,33 @@ Here's a few of my Ghost Inspector Helper Scripts & Importable Testing Utilities
 <!-- TOC -->
 
 - [Ghost Inspector Helper Scripts & Importable Testing Utilities](#ghost-inspector-helper-scripts--importable-testing-utilities)
-    - [Importable Testing Utilities](#importable-testing-utilities)
-        - [1. _Ghost Inspector wait for Emails to arrive in ___email.ghostinspector.com___ inbox_](#1-_ghost-inspector-wait-for-emails-to-arrive-in-___emailghostinspectorcom___-inbox_)
-        - [2. _Ghost Inspector Test Email Subject is present in __Mailtrap.io__ Inbox_](#2-_ghost-inspector-test-email-subject-is-present-in-__mailtrapio__-inbox_)
-        - [3. Javascript Eventually Returns True]()
-        - [4. wait_for_element_selector to be present]()
-        - [5. Test Guard (Exit Early)]()
-        - [6. Setup Shared Test]()
-    - [Helper Scripts](#helper-scripts)
-        - [1. _Python Script to backup all Ghost Inspector Suite Data (Exported as Zipped JSON data) and automatically push it to a github repo_](#1-_python-script-to-backup-all-ghost-inspector-suite-data-exported-as-zipped-json-data-and-automatically-push-it-to-a-github-repo_)
+  - [Importable Testing Utilities](#importable-testing-utilities)
+    - [1. _Ghost Inspector Email Service wait for Emails to arrive in ___email.ghostinspector.com___ inbox_](#1-ghost-inspector-email-service-wait-for-emails-to-arrive-in-emailghostinspectorcom-inbox)
+    - [2. _Ghost Inspector Test Email Subject is present in __Mailtrap.io__ Inbox_](#2-ghost-inspector-test-email-subject-is-present-in-mailtrapio-inbox)
+    - [3. Javascript Eventually Returns True](#3-javascript-eventually-returns-true)
+    - [4. wait_for_element_selector to be present](#4-waitforelementselector-to-be-present)
+    - [5. Test Guard Exit Early](#5-test-guard-exit-early)
+    - [6. Setup Shared Test - Custom Environment-based variables ENVVARS depending on startUrl](#6-setup-shared-test---custom-environment-based-variables-envvars-depending-on-starturl)
+  - [Helper Scripts](#helper-scripts)
+    - [1. _Python Script to backup all Ghost Inspector Suite Data (Exported as Zipped JSON data) and automatically push it to a github repo_](#1-python-script-to-backup-all-ghost-inspector-suite-data-exported-as-zipped-json-data-and-automatically-push-it-to-a-github-repo)
 
 <!-- /TOC -->
+
 
 Gists:
 - [Example of How to Programmatically Update Easy MarkDown Editor / CodeMirror / Simple Editor Input Value for Integration & Acceptance Testing](https://gist.github.com/jakedowns/b3f9a90de1182af083024e037e3ac42f)
 
 ---
 
-<a id="markdown-importable-testing-utilities" name="importable-testing-utilities"></a>
 ## Importable Testing Utilities
 
-<a id="markdown-1-_ghost-inspector-wait-for-emails-to-arrive-in-___emailghostinspectorcom___-inbox_" name="1-_ghost-inspector-wait-for-emails-to-arrive-in-___emailghostinspectorcom___-inbox_"></a>
+
 ### 1. _Ghost Inspector Email Service wait for Emails to arrive in ___email.ghostinspector.com___ inbox_
 
 A helper that will keep checking for a set of email subjects to be present in a particular email.ghostinspector.com inbox
 
 View Readme: [readmes/WaitForEmails.md](https://github.com/jakedowns/ghost-inspector-helpers/blob/master/readmes/WaitForEmails.md)
 
-<a id="markdown-2-_ghost-inspector-test-email-subject-is-present-in-__mailtrapio__-inbox_" name="2-_ghost-inspector-test-email-subject-is-present-in-__mailtrapio__-inbox_"></a>
 ### 2. _Ghost Inspector Test Email Subject is present in __Mailtrap.io__ Inbox_
 
 A helper that will keep checking Mailtrap.io api for the existence of an email with a particular subject line until time runs out. (could easily be modified to wait for multiple email subjects to be present)
@@ -65,9 +63,8 @@ A small ghost inspector test helper that one can include at the top of each in a
 View Readme: [readmes/SetupSharedTest.md](https://github.com/jakedowns/ghost-inspector-helpers/blob/master/readmes/SetupSharedTest.md)
 
 ---
-<a id="markdown-helper-scripts" name="helper-scripts"></a>
 ## Helper Scripts
-<a id="markdown-1-_python-script-to-backup-all-ghost-inspector-suite-data-exported-as-zipped-json-data-and-automatically-push-it-to-a-github-repo_" name="1-_python-script-to-backup-all-ghost-inspector-suite-data-exported-as-zipped-json-data-and-automatically-push-it-to-a-github-repo_"></a>
+
 ### 1. _Python Script to backup all Ghost Inspector Suite Data (Exported as Zipped JSON data) and automatically push it to a github repo_
 See the script in this repo: [backup-all-suites-to-git.py](https://github.com/jakedowns/ghost-inspector-helpers/blob/master/backup-all-suites-to-git.py)
 
