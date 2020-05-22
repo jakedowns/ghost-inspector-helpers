@@ -43,9 +43,35 @@
             "optional": false,
             "private": false,
             "sequence": 1,
-            "command": "extractEval",
+            "command": "store",
             "target": "",
-            "value": "const selector = \"{{wait_for_element_selector}}\"\r\nlet start = performance.now();\r\nconst MAX = 59000;\r\nreturn new Promise(async (resolve,reject)=>{\r\n    let check = async function(){\r\n    \tlet selected = $(selector);\r\n    \tif(selected.length>0){\r\n    \t\tresolve(selected.length);\r\n    \t}else if(performance.now() - start >= MAX){\r\n    \t\t//reject(\"failed to locate \".selector);\r\n    \t\tresolve(false);\r\n    \t}else{\r\n    \t\tawait sleep(100)\r\n    \t\tawait check();\r\n    \t}\r\n    }\r\n    await check();\r\n});",
+            "value": "return document.querySelectorAll('{{wait_for_element_selector}}')",
+            "variableName": "javascript_eventually_returns_true"
+        },
+        {
+            "condition": {
+                "statement": "return \"{{wait_for_element_resolved}}\" !== \"true\"",
+                "result": false
+            },
+            "optional": false,
+            "private": false,
+            "sequence": 2,
+            "command": "execute",
+            "target": "",
+            "value": "5ec6dd82a6f65371c4b93a0f",
+            "variableName": ""
+        },
+        {
+            "condition": {
+                "statement": "return \"{{wait_for_element_resolved}}\" !== \"true\"",
+                "result": false
+            },
+            "optional": false,
+            "private": false,
+            "sequence": 3,
+            "command": "store",
+            "target": "",
+            "value": "true",
             "variableName": "wait_for_element_resolved"
         }
     ],

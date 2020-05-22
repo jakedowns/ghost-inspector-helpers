@@ -13,8 +13,8 @@
     "maxAjaxDelay": null,
     "maxConcurrentDataRows": null,
     "maxWaitDelay": null,
-    "name": "Javascript Eventually Returns True",
-    "notifications": null,
+    "name": "javascript_eventually_returns_true",
+    "notifications": {},
     "publicStatusEnabled": false,
     "region": null,
     "screenshotCompareEnabled": null,
@@ -26,9 +26,119 @@
             "optional": false,
             "private": false,
             "sequence": 0,
+            "command": "store",
+            "target": "",
+            "value": "false",
+            "variableName": "javascript_eventually_returned_true"
+        },
+        {
+            "condition": null,
+            "optional": false,
+            "private": false,
+            "sequence": 1,
+            "command": "execute",
+            "target": "",
+            "value": "5ec840b797e4531b3aa77066",
+            "variableName": ""
+        },
+        {
+            "condition": null,
+            "optional": false,
+            "private": false,
+            "sequence": 2,
+            "command": "execute",
+            "target": "",
+            "value": "5ec840b797e4531b3aa77066",
+            "variableName": ""
+        },
+        {
+            "condition": null,
+            "optional": false,
+            "private": false,
+            "sequence": 3,
+            "command": "execute",
+            "target": "",
+            "value": "5ec840b797e4531b3aa77066",
+            "variableName": ""
+        },
+        {
+            "condition": null,
+            "optional": false,
+            "private": false,
+            "sequence": 4,
+            "command": "execute",
+            "target": "",
+            "value": "5ec840b797e4531b3aa77066",
+            "variableName": ""
+        },
+        {
+            "condition": null,
+            "optional": false,
+            "private": false,
+            "sequence": 5,
+            "command": "execute",
+            "target": "",
+            "value": "5ec840b797e4531b3aa77066",
+            "variableName": ""
+        },
+        {
+            "condition": null,
+            "optional": false,
+            "private": false,
+            "sequence": 6,
+            "command": "execute",
+            "target": "",
+            "value": "5ec840b797e4531b3aa77066",
+            "variableName": ""
+        },
+        {
+            "condition": null,
+            "optional": false,
+            "private": false,
+            "sequence": 7,
+            "command": "execute",
+            "target": "",
+            "value": "5ec840b797e4531b3aa77066",
+            "variableName": ""
+        },
+        {
+            "condition": null,
+            "optional": false,
+            "private": false,
+            "sequence": 8,
+            "command": "execute",
+            "target": "",
+            "value": "5ec840b797e4531b3aa77066",
+            "variableName": ""
+        },
+        {
+            "condition": null,
+            "optional": false,
+            "private": false,
+            "sequence": 9,
+            "command": "execute",
+            "target": "",
+            "value": "5ec840b797e4531b3aa77066",
+            "variableName": ""
+        },
+        {
+            "condition": null,
+            "optional": false,
+            "private": false,
+            "sequence": 10,
+            "command": "execute",
+            "target": "",
+            "value": "5ec840b797e4531b3aa77066",
+            "variableName": ""
+        },
+        {
+            "condition": null,
+            "optional": false,
+            "private": false,
+            "sequence": 11,
             "command": "assertEval",
             "target": "",
-            "value": "let start = performance.now();\r\nconst MAX = 59000;\r\nreturn new Promise(async (resolve,reject)=>{\r\n    let check = async function(){\r\n    \tlet passing = (()=>{\r\n    \t    {{javascript_eventually_returns_true}}\r\n    \t})();\r\n    \tif(passing){\r\n    \t\tresolve(passing);\r\n    \t}else if(performance.now() - start >= MAX){\r\n    \t\tresolve(false,'ran out of time');\r\n    \t}else{\r\n    \t\tawait sleep(100)\r\n    \t\tawait check();\r\n    \t}\r\n    }\r\n    await check();\r\n});",
+            "value": "return \"{{javascript_eventually_returned_true}}\" === \"true\";",
             "variableName": ""
         }
     ],

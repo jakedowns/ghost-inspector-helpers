@@ -1,16 +1,29 @@
 # javascript_eventually_returns_true
 
-Ghost Inspector Helper that continually executes a bit of javascript until it returns true (Asyncronous Javascript Promise Resolves `true`) or time runs out. Default Checker Interval / Frequency is 100ms, but you can customize it. Just define a variable named `javascript_eventually_returns_true` to a bit of Javascript (that MUST start with a `return` statement) then Import this helper to proceed once it passes as true
+Ghost Inspector Helper that continually executes a bit of javascript until it returns true (Asyncronous Javascript Promise Resolves `true`) or time runs out. Default Checker Interval / Frequency is 100ms, but you can customize it. Just define a variable named `javascript_eventually_returns_true` to a bit of Javascript (that MUST end with a `return` statement) then Import this helper to proceed once it passes as true
 
-## A. Importables - javascript_eventually_returns_true
+## Usage
 
-### Step 1.
+### Step 1: 
+- `SetVariable` `javascript_eventually_returns_true` =
+> Note this can be whatever as long as it's valid Javascript (ES6 allowed) and ends with a valid `return` statement.
+
+Here's an example though which returns True once the element(s) are in the DOM:
+```@javascript
+return document.querySelectorAll('{{wait_for_element_selector}}')
+```
+
+## Definitions
+
+### A. Importables - javascript_eventually_returns_true
+
+#### Step 1.
 
 Unset our flag in case we imported this once already
 
 Set Variable `javascript_eventually_returned_true` = `false`
 
-### Step 2. => 11.
+#### Step 2. => 11.
 
 Given:
 ```@javascript
@@ -25,18 +38,18 @@ max_test_execution_time = 10m /* hard max limit; not configurable */
 
 `Import steps from test` = `Importables - javascript_eventually_returns_true (60s step)`
 
-### Step 12.
+#### Step 12.
 
-Assert that it did indeed finally resolve as true
+**Assert** that it did indeed finally resolve as true
 
 `Javscript Returns True`:
 ```@javascript
 return "{{javascript_eventually_returned_true}}" === "true";
 ```
 
-## B. Importables - javascript_eventually_returns_true (60s step)
+### B. Importables - javascript_eventually_returns_true (60s step)
 
-### Step. 1
+#### Step. 1
 
 Conditionally:
 ```@javascript

@@ -12,8 +12,8 @@ Step 1. => 10.
 
 ## B. wait_for_element_selector to be present (60s step)
 
-Step 1.    
-- Conditional:
+### Step 1.    
+- Conditionally:
 ```@javascript
 return "{{wait_for_element_resolved}}" !== "true"
 ```
@@ -24,34 +24,25 @@ return "{{wait_for_element_selector}}".trim().length > 0;
 
 - Note: `wait_for_element_selector required`
 
-Step 2.
-- Conditional: same as Step 1.
+### Step 2.
+- Conditionally: same Condition as Step 1.
 
-- `Extract from Javascript`: `wait_for_element_resolved` =
-```@javascript
-const sleep = m => new Promise(r => setTimeout(r, m))
-const selector = "{{wait_for_element_selector}}"
-let start = performance.now();
-const MAX = 59000;
-return new Promise(async (resolve,reject)=>{
-    let check = async function(){
-    	let selected = $(selector);
-    	if(selected.length>0){
-    		resolve(selected.length);
-    	}else if(performance.now() - start >= MAX){
-    		//reject("failed to locate ".selector);
-    		resolve(false);
-    	}else{
-    		await sleep(100)
-    		await check();
-    	}
-    }
-    await check();
-});
-```
+- Set Variable `return document.querySelectorAll('{{wait_for_element_selector}}')` = `javascript_eventually_returns_true`
 
-> NOTE: this particular implementation relies on jQuery. if you want to change it to be Vanilla Javascript Only:
-> 1. `SetVariable` `javascript_eventually_returns_true` = `return document.querySelector({{wait_for_element_selector}})` OR `return document.querySelectorAll({{wait_for_element_selector}})`
-> 2. Import Importables - javascript_eventually_returns_true Instead. View Readme: [javascript_eventually_returns_true.md](javascript_eventually_returns_true.md)
+### Step 3.
+
+- Import Steps from Test: `Importables - javascript_eventually_returns_true`
+
+### Step 4.
+
+Flag our element as found so we can stop checking and move on
+
+- Set Variable `true` = `wait_for_element_resolved`
+
+> NOTE: this particular implementation uses `document.querySelectorAll` but you can use jQuery or Whatever you want in `SetVariable` `javascript_eventually_returns_true` as long as it ends with a `return` statement
+
+
+## See Also:
+- [readmes/javascript_eventually_returns_true.md](https://github.com/jakedowns/ghost-inspector-helpers/blob/master/readmes/javascript_eventually_returns_true.md)
 
 
