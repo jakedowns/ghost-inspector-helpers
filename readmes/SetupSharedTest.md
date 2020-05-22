@@ -105,7 +105,7 @@ const config = {{config}}
 return config.my_envvar_name;
 ```
 
-Final Step
+## Final Step
 
 Last step is to flag the config extraction as complete so it doesn't need to run again
 
