@@ -29,6 +29,7 @@ Step 2.
 
 - `Extract from Javascript`: `wait_for_element_resolved` =
 ```@javascript
+const sleep = m => new Promise(r => setTimeout(r, m))
 const selector = "{{wait_for_element_selector}}"
 let start = performance.now();
 const MAX = 59000;
