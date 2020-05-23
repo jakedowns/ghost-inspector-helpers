@@ -26,8 +26,11 @@ Gists:
 ## Importable Testing Utilities
 
 How to use: 
-- You could _technically_ import as many of these Helper Tests using the .json files in the [ImportableTestingUtilities](ImportableTestingUtilities) folder. I'd import them them in a fresh "Importables" Suite. Using the instructions here: [https://ghostinspector.com/docs/selenium-import-export/#import-json]() BUT-- I haven't tested that yet...
-- the better way (altho slower) way, would probably be to go through the Readme's here: [https://github.com/jakedowns/ghost-inspector-helpers/tree/master/readmes]() and see which helpers you'd like to try, then recreate them yourself using the documented steps. LMK if you run into any issues. Happy to help.
+- You could _technically_ import as many of these Helper Tests using the .json files in the [ImportableTestingUtilities](ImportableTestingUtilities) folder. I'd import them them in a fresh "Importables" Suite. Using the instructions here: [https://ghostinspector.com/docs/selenium-import-export/#import-json]()
+    - unfortunately, this import method must be done one test at a time, and it requires you to stub in the tests by hand first, then update the IDs in the JSON files to match your new destination stubs. 
+        - __I'll look into altering my `backup.py` script to support exporting the more easily importable "Selenium IDE v1" format soon__ 
+        - I'll also be looking into creating an `import.py` script to help with this process
+- for now, the better way (altho slower?) way, would probably be to go through the Readme's here: [https://github.com/jakedowns/ghost-inspector-helpers/tree/master/readmes]() and see which helpers you'd like to try, then recreate them yourself using the documented steps. LMK if you run into any issues. Happy to help.
 
 
 ### 1. _Ghost Inspector Email Service wait for Emails to arrive in ___email.ghostinspector.com___ inbox_
@@ -69,8 +72,14 @@ View Readme: [readmes/SetupSharedTest.md](https://github.com/jakedowns/ghost-ins
 ---
 ## Helper Scripts
 
+TODOS:
+- create an import.py script for importing from backups
+
 ### 1. _Python Script to backup all Ghost Inspector Suite Data (Exported as Zipped JSON data) and automatically push it to a github repo_
 See the script in this repo: [HelperScripts/GIBackupGitPython/backup.py](https://github.com/jakedowns/ghost-inspector-helpers/blob/master/HelperScripts/GIBackupGitPython/backup.py)
+
+Known Issues / Todos:
+- Support option to export in Selenium IDE v1 format
 
 Usage:
 
