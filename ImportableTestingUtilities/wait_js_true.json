@@ -13,7 +13,7 @@
     "maxAjaxDelay": null,
     "maxConcurrentDataRows": null,
     "maxWaitDelay": null,
-    "name": "javascript_eventually_returns_true",
+    "name": "wait_js_true",
     "notifications": {},
     "publicStatusEnabled": false,
     "region": null,
@@ -29,7 +29,7 @@
             "command": "store",
             "target": "",
             "value": "false",
-            "variableName": "javascript_eventually_returned_true"
+            "variableName": "wait_js_true_done"
         },
         {
             "condition": null,
@@ -138,8 +138,9 @@
             "sequence": 11,
             "command": "assertEval",
             "target": "",
-            "value": "return \"{{javascript_eventually_returned_true}}\" === \"true\";",
-            "variableName": ""
+            "value": "let result = \"{{wait_js_true_done}}\"\nreturn result.trim().length > 0 && result !== \"false\" && result !== \"0\";",
+            "variableName": "",
+            "notes": "**Assert** that it did indeed finally resolve as truthy"
         }
     ],
     "testFrequency": 0,

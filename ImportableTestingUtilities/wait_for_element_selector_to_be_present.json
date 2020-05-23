@@ -46,7 +46,7 @@
             "command": "store",
             "target": "",
             "value": "return document.querySelectorAll(\"{{wait_for_element_selector}}\").length > 0",
-            "variableName": "javascript_eventually_returns_true"
+            "variableName": "wait_js_true"
         },
         {
             "condition": {

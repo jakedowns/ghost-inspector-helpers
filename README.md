@@ -49,7 +49,7 @@ View Readme: [readmes/WaitForEmailMailtrap_io.md](https://github.com/jakedowns/g
 
 A helper that will continually execute a bit of javascript until it returns true or time runs out (Ns -> 60s -> 10min depending on your setup)
 
-View Readme: [readmes/javascript_eventually_returns_true.md](https://github.com/jakedowns/ghost-inspector-helpers/blob/master/readmes/javascript_eventually_returns_true.md)
+View Readme: [readmes/wait_js_true.md](https://github.com/jakedowns/ghost-inspector-helpers/blob/master/readmes/wait_js_true.md)
 
 ### 4. wait_for_element_selector to be present
 

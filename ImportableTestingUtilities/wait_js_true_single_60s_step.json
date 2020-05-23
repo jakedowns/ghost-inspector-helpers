@@ -1,0 +1,41 @@
+{
+    "autoRetry": null,
+    "browser": null,
+    "disableVisuals": null,
+    "disallowInsecureCertificates": null,
+    "failOnJavaScriptError": null,
+    "filters": [],
+    "finalDelay": null,
+    "globalStepDelay": null,
+    "httpHeaders": [],
+    "language": null,
+    "links": [],
+    "maxAjaxDelay": null,
+    "maxConcurrentDataRows": null,
+    "maxWaitDelay": null,
+    "name": "wait_js_true (single 60s step)",
+    "notifications": {},
+    "publicStatusEnabled": false,
+    "region": null,
+    "screenshotCompareEnabled": null,
+    "screenshotCompareThreshold": 0.1,
+    "startUrl": null,
+    "steps": [
+        {
+            "condition": {
+                "statement": "let passing = \"{{wait_js_true_done}}\";\nreturn !passing.trim().length && passing !== \"false\" && result !== \"0\"; /* !wait_js_true_done? */",
+                "result": false
+            },
+            "optional": false,
+            "private": false,
+            "sequence": 0,
+            "command": "extractEval",
+            "target": "",
+            "value": "let start = performance.now();\r\nconst sleep = m => new Promise(r => setTimeout(r, m))\r\nconst MAX = 59000;\r\nreturn new Promise(async (resolve,reject)=>{\r\n    let check = async function(){\r\n    \tlet passing = (()=>{\r\n    \t    {{wait_js_true}}\r\n    \t})();\r\n    \tif(passing){\r\n    \t\tresolve(passing);\r\n    \t}else if(performance.now() - start >= MAX){\r\n    \t\tresolve(false,'ran out of time');\r\n    \t}else{\r\n    \t\tawait sleep(100)\r\n    \t\tawait check();\r\n    \t}\r\n    }\r\n    await check();\r\n});",
+            "variableName": "wait_js_true_done"
+        }
+    ],
+    "testFrequency": 0,
+    "testFrequencyAdvanced": [],
+    "viewportSize": null
+}

@@ -2,7 +2,7 @@
 
 ### See Also:
 
-- [readmes/javascript_eventually_returns_true.md](https://github.com/jakedowns/ghost-inspector-helpers/blob/master/readmes/javascript_eventually_returns_true.md)
+- [readmes/wait_js_true.md](https://github.com/jakedowns/ghost-inspector-helpers/blob/master/readmes/wait_js_true.md)
 
 ## Usage
 
@@ -32,10 +32,10 @@ return "{{wait_for_element_selector}}".trim().length > 0;
 #### Step 2.
 - Conditionally: same Condition as Step 1.
 
-- Set Variable `return document.querySelectorAll("{{wait_for_element_selector}}").length > 0` = `javascript_eventually_returns_true`
+- Set Variable `return document.querySelectorAll("{{wait_for_element_selector}}").length > 0` = `wait_js_true`
 
 #### Step 3.
 
-- Import Steps from Test: `Importables - javascript_eventually_returns_true`
+- Import Steps from Test: `Importables - wait_js_true`
 
-> NOTE: this particular implementation uses `document.querySelectorAll` but you can use jQuery or Whatever you want in `SetVariable` `javascript_eventually_returns_true` as long as it ends with a `return` statement which returns anything other than `null`, an empty string `''`, or `false`;
+> NOTE: this particular implementation uses `document.querySelectorAll` but you can use jQuery or Whatever you want in `SetVariable` `wait_js_true` as long as it ends with a `return` statement which returns anything other than `null`, an empty string `''`, or `false`;

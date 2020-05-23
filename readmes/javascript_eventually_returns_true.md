@@ -1,11 +1,13 @@
-# javascript_eventually_returns_true
+# wait_js_true
 
-Ghost Inspector Helper that continually executes a bit of javascript until it returns true (Asyncronous Javascript Promise Resolves `true`) or time runs out. Default Checker Interval / Frequency is 100ms, but you can customize it. Just define a variable named `javascript_eventually_returns_true` to a bit of Javascript (that MUST end with a `return` statement) then Import this helper to proceed once it passes as true
+Ghost Inspector Helper that continually executes a bit of javascript until it returns true (Asyncronous Javascript Promise Resolves `true`) or time runs out. Default Checker Interval / Frequency is 100ms, but you can customize it. Just define a variable named `wait_js_true` to a bit of Javascript (that MUST end with a `return` statement) then Import this helper to proceed once it passes as true
+
+After the importer runs and passes, you can access the "truthy" (non-undefined, non-null, non-empty-string, non-"false", non-"0") result of the operation via the `{{wait_js_true_done}}` variable
 
 ## Usage:
 
 ### Step 1: 
-- `SetVariable` `javascript_eventually_returns_true` =
+- `SetVariable` `wait_js_true` =
 > Note this can be whatever as long as it's valid Javascript (ES6 allowed) and ends with a valid `return` statement.
 
 Here's an example taken from [readmes/wait_for_element_selector.md](https://github.com/jakedowns/ghost-inspector-helpers/blob/master/readmes/wait_for_element_selector.md) which returns True once the element(s) are in the DOM:
@@ -15,13 +17,13 @@ return document.querySelectorAll('{{wait_for_element_selector}}')
 
 ## Test Definitions:
 
-### A. Importables - javascript_eventually_returns_true
+### A. Importables - wait_js_true
 
 #### Step 1.
 
 Unset our flag in case we imported this once already
 
-Set Variable `javascript_eventually_returned_true` = `false`
+Set Variable `wait_js_true_done` = `false`
 
 #### Step 2. => 11.
 
@@ -36,25 +38,26 @@ max_test_execution_time = 10m /* hard max limit; not configurable */
 > 
 > max_test_execution_time / max_element_timeout = 10x
 
-`Import steps from test` = `Importables - javascript_eventually_returns_true (60s step)`
+`Import steps from test` = `Importables - wait_js_true (60s step)`
 
 #### Step 12.
 
-**Assert** that it did indeed finally resolve as true
+**Assert** that it did indeed finally resolve as truthy
 
 `Javscript Returns True`:
 ```javascript
-return "{{javascript_eventually_returned_true}}" === "true";
+let result = "{{wait_js_true_done}}"
+return result.trim().length > 0 && result !== "false" && result !== "0";
 ```
 
-### B. Importables - javascript_eventually_returns_true (60s step)
+### B. Importables - wait_js_true (60s step)
 
 #### Step. 1
 
 Conditionally:
 ```javascript
-let passing = "{{javascript_eventually_returned_true}}";
-return !passing.trim().length || passing !== "true"; /* javascript_eventually_returned_true */
+let passing = "{{wait_js_true_done}}";
+return !passing.trim().length && passing !== "false" && result !== "0"; /* !wait_js_true_done? */
 ```
 
 Extract From Javascript:
@@ -65,7 +68,7 @@ const MAX = 59000;
 return new Promise(async (resolve,reject)=>{
     let check = async function(){
     	let passing = (()=>{
-    	    {{javascript_eventually_returns_true}}
+    	    {{wait_js_true}}
     	})();
     	if(passing){
     		resolve(passing);
@@ -79,4 +82,4 @@ return new Promise(async (resolve,reject)=>{
     await check();
 });
 ```
-= `javascript_eventually_returned_true`
+= `wait_js_true_done`
