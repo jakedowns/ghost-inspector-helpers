@@ -25,6 +25,10 @@ Gists:
 
 ## Importable Testing Utilities
 
+How to use: 
+- You could _technically_ import as many of these Helper Tests using the .json files in the [ImportableTestingUtilities](ImportableTestingUtilities) folder. I'd import them them in a fresh "Importables" Suite. Using the instructions here: [https://ghostinspector.com/docs/selenium-import-export/#import-json]() BUT-- I haven't tested that yet...
+- the better way (altho slower) way, would probably be to go through the Readme's here: [https://github.com/jakedowns/ghost-inspector-helpers/tree/master/readmes]() and see which helpers you'd like to try, then recreate them yourself using the documented steps. LMK if you run into any issues. Happy to help.
+
 
 ### 1. _Ghost Inspector Email Service wait for Emails to arrive in ___email.ghostinspector.com___ inbox_
 
@@ -66,6 +70,22 @@ View Readme: [readmes/SetupSharedTest.md](https://github.com/jakedowns/ghost-ins
 ## Helper Scripts
 
 ### 1. _Python Script to backup all Ghost Inspector Suite Data (Exported as Zipped JSON data) and automatically push it to a github repo_
-See the script in this repo: [backup-all-suites-to-git.py](https://github.com/jakedowns/ghost-inspector-helpers/blob/master/backup-all-suites-to-git.py)
+See the script in this repo: [HelperScripts/GIBackupGitPython/backup.py](https://github.com/jakedowns/ghost-inspector-helpers/blob/master/HelperScripts/GIBackupGitPython/backup.py)
 
-It downloads all of your GhostInspector Suites as zipped JSON files, extracts them, deletes the zips, _**pretty prints**_ / formats the JSON files, then automatically commits and pushes to `master` branch of whatever Git Repository it is nestled within. You just need to find a way to trigger the script to run periodically. Or even better, a Chrome Extension which triggers it each time you hit Save on a Test's "Edit Steps" page (stay tuned for more on that)
+Usage:
+
+- Download the GIBackupGitPython folder into an existing git repo you use, or into a fresh git repo, or fork this repo. 
+- copy the `.env.example` file to a new (gitignored) `.env` file and add your GhostInspector api key: `GI_API_KEY` and `GIT_AUTHOR` to define who the commits will be committed as
+- cd into the directory in a terminal and run `pip install requirements.txt` (I've only tested with Python3, your mileage may vary, you may need to install deps by hand)
+- run `python backup.py` or `python3 backup.py` depending on your setup
+- try commenting out the 'commit' step in backup.py if you want to dry run test things first
+
+The script:
+- downloads all of your GhostInspector Suites as zipped JSON files, 
+- extracts them & deletes the now extraneous .zip files
+- formats the JSON files (_**pretty prints**_ with newlines and indentation) 
+- automatically commits and pushes to `master` branch of whatever Git Repository it is nestled within. 
+
+For "automated" backups, you just need to find a way to trigger the script to run periodically.
+Using a cron-job or some other automated method. Maybe even a Scheduled GI test that hits an api to trigger the script to run on a server you own. 
+I also imagine it'd be cool to have a Chrome Extension which triggers it each time you hit Save on a Test's "Edit Steps" page (stay tuned for more on that)
