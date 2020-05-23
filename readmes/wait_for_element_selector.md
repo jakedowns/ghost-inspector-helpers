@@ -1,6 +1,7 @@
 # wait_for_element_selector to be present
 
-## See Also:
+### See Also:
+
 - [readmes/javascript_eventually_returns_true.md](https://github.com/jakedowns/ghost-inspector-helpers/blob/master/readmes/javascript_eventually_returns_true.md)
 
 ## Usage
@@ -10,22 +11,11 @@
 
 ### Step 2. Import Steps from Test `Importables - wait_for_element_selector to be present`
 
-
 ## Test Definitions:
 
-### A. Importables - wait_for_element_selector to be present
+### Importables - wait_for_element_selector to be present
 
-#### Step 1. => 10.
-```javascript
-max_element_timeout = 60s /* max step time */
-max_test_execution_time = 10m
-```
-> Repeat this step 10x times:
-> 
-> max_test_execution_time / max_element_timeout = 10
-`Import steps from test` = `Importables - wait_for_element_selector to be present (60s step)`
-
-### B. wait_for_element_selector to be present (60s step)
+> Click here to see the `.json` "Ghost Inspector" source file of this ghostinspector test definition: [ImportableTestingUtilities/wait_for_element_selector_to_be_present.json](https://github.com/jakedowns/ghost-inspector-helpers/blob/master/ImportableTestingUtilities/wait_for_element_selector_to_be_present.json) 
 
 #### Step 1.    
 - Conditionally:
@@ -42,16 +32,10 @@ return "{{wait_for_element_selector}}".trim().length > 0;
 #### Step 2.
 - Conditionally: same Condition as Step 1.
 
-- Set Variable `return document.querySelectorAll("{{wait_for_element_selector}}")` = `javascript_eventually_returns_true`
+- Set Variable `return document.querySelectorAll("{{wait_for_element_selector}}").length > 0` = `javascript_eventually_returns_true`
 
 #### Step 3.
 
 - Import Steps from Test: `Importables - javascript_eventually_returns_true`
 
-#### Step 4.
-
-Flag our element as found so we can stop checking and move on
-
-- Set Variable `true` = `wait_for_element_resolved`
-
-> NOTE: this particular implementation uses `document.querySelectorAll` but you can use jQuery or Whatever you want in `SetVariable` `javascript_eventually_returns_true` as long as it ends with a `return` statement
+> NOTE: this particular implementation uses `document.querySelectorAll` but you can use jQuery or Whatever you want in `SetVariable` `javascript_eventually_returns_true` as long as it ends with a `return` statement which returns anything other than `null`, an empty string `''`, or `false`;

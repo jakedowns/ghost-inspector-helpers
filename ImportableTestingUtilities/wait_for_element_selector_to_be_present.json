@@ -22,104 +22,57 @@
     "startUrl": null,
     "steps": [
         {
-            "condition": null,
+            "condition": {
+                "statement": "return \"{{wait_for_element_resolved}}\" !== \"true\"",
+                "result": false
+            },
             "optional": false,
             "private": false,
             "sequence": 0,
-            "command": "execute",
+            "command": "assertEval",
             "target": "",
-            "value": "5ec5633396a5c65f94daf1de",
-            "variableName": ""
+            "value": "return \"{{wait_for_element_selector}}\".trim().length > 0;",
+            "variableName": "",
+            "notes": "wait_for_element_selector required"
         },
         {
-            "condition": null,
+            "condition": {
+                "statement": "return \"{{wait_for_element_resolved}}\" !== \"true\"",
+                "result": false
+            },
             "optional": false,
             "private": false,
             "sequence": 1,
-            "command": "execute",
+            "command": "store",
             "target": "",
-            "value": "5ec5633396a5c65f94daf1de",
-            "variableName": ""
+            "value": "return document.querySelectorAll(\"{{wait_for_element_selector}}\").length > 0",
+            "variableName": "javascript_eventually_returns_true"
         },
         {
-            "condition": null,
+            "condition": {
+                "statement": "return \"{{wait_for_element_resolved}}\" !== \"true\"",
+                "result": false
+            },
             "optional": false,
             "private": false,
             "sequence": 2,
             "command": "execute",
             "target": "",
-            "value": "5ec5633396a5c65f94daf1de",
+            "value": "5ec6dd82a6f65371c4b93a0f",
             "variableName": ""
         },
         {
-            "condition": null,
+            "condition": {
+                "statement": "return \"{{wait_for_element_resolved}}\" !== \"true\"",
+                "result": false
+            },
             "optional": false,
             "private": false,
             "sequence": 3,
-            "command": "execute",
+            "command": "store",
             "target": "",
-            "value": "5ec5633396a5c65f94daf1de",
-            "variableName": ""
-        },
-        {
-            "condition": null,
-            "optional": false,
-            "private": false,
-            "sequence": 4,
-            "command": "execute",
-            "target": "",
-            "value": "5ec5633396a5c65f94daf1de",
-            "variableName": ""
-        },
-        {
-            "condition": null,
-            "optional": false,
-            "private": false,
-            "sequence": 5,
-            "command": "execute",
-            "target": "",
-            "value": "5ec5633396a5c65f94daf1de",
-            "variableName": ""
-        },
-        {
-            "condition": null,
-            "optional": false,
-            "private": false,
-            "sequence": 6,
-            "command": "execute",
-            "target": "",
-            "value": "5ec5633396a5c65f94daf1de",
-            "variableName": ""
-        },
-        {
-            "condition": null,
-            "optional": false,
-            "private": false,
-            "sequence": 7,
-            "command": "execute",
-            "target": "",
-            "value": "5ec5633396a5c65f94daf1de",
-            "variableName": ""
-        },
-        {
-            "condition": null,
-            "optional": false,
-            "private": false,
-            "sequence": 8,
-            "command": "execute",
-            "target": "",
-            "value": "5ec5633396a5c65f94daf1de",
-            "variableName": ""
-        },
-        {
-            "condition": null,
-            "optional": false,
-            "private": false,
-            "sequence": 9,
-            "command": "execute",
-            "target": "",
-            "value": "5ec5633396a5c65f94daf1de",
-            "variableName": ""
+            "value": "true",
+            "variableName": "wait_for_element_resolved"
         }
     ],
     "testFrequency": 0,
