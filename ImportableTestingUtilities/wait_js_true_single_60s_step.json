@@ -23,7 +23,7 @@
     "steps": [
         {
             "condition": {
-                "statement": "let passing = \"{{wait_js_true_done}}\";\nreturn !passing.trim().length && passing !== \"false\" && result !== \"0\"; /* !wait_js_true_done? */",
+                "statement": "let passing = \"{{wait_js_true_done}}\";\nreturn !passing.trim().length || passing == \"false\"; /* !wait_js_true_done? */",
                 "result": false
             },
             "optional": false,

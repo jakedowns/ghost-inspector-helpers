@@ -69,7 +69,7 @@ See Defintion in .json Format: [ImportableTestingUtilities/wait_js_true_single_6
 Conditionally:
 ```javascript
 let passing = "{{wait_js_true_done}}";
-return !passing.trim().length && passing !== "false" && result !== "0"; /* !wait_js_true_done? */
+return !passing.trim().length || passing == "false"; /* !wait_js_true_done? */
 ```
 
 Extract From Javascript:
