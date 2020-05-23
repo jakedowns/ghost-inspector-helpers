@@ -3,6 +3,8 @@ Url: https://gist.github.com/wassname/1393c4a57cfcbf03641dbc31886123b8
 """
 import unicodedata
 import string
+import os
+import re
 
 valid_filename_chars = "-_.() %s%s" % (string.ascii_letters, string.digits)
 char_limit = 255

@@ -78,7 +78,7 @@ Usage:
 - copy the `.env.example` file to a new (gitignored) `.env` file and add your GhostInspector api key: `GI_API_KEY` and `GIT_AUTHOR` to define who the commits will be committed as
 - cd into the directory in a terminal and run `pip install requirements.txt` (I've only tested with Python3, your mileage may vary, you may need to install deps by hand)
 - run `python backup.py` or `python3 backup.py` depending on your setup
-- try commenting out the 'commit' step in backup.py if you want to dry run test things first
+- NOTE try commenting out the 'commit' and 'push' lines in `backup.py` if you want to dry run test things first
 
 The script:
 - downloads all of your GhostInspector Suites as zipped JSON files, 

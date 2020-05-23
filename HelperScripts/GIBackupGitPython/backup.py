@@ -1,16 +1,13 @@
 import requests
 import os
 import pathlib
-from multiprocessing.pool import ThreadPool
 import git
 import zipfile
 import json
-import re
-
+import backup_utils
+from multiprocessing.pool import ThreadPool
 from dotenv import load_dotenv
 load_dotenv()
-
-import utils
 
 # Ghostinspector API
 GI_API_KEY = os.getenv("GI_API_KEY")
@@ -32,7 +29,7 @@ if not os.path.exists(BACKUPS_DIR):
     os.makedirs(BACKUPS_DIR)
 #add_names = []
 try:
-    existing = utils.listdir_nohidden(BACKUPS_DIR)
+    existing = backup_utils.listdir_nohidden(BACKUPS_DIR)
     if len(existing):
         for ex in existing:
             try:
@@ -47,7 +44,7 @@ list_suites_resp = requests.get(f"https://api.ghostinspector.com/v1/suites/?apiK
 def backup_suite(s):
     resp = requests.get(f"https://api.ghostinspector.com/v1/suites/{s['_id']}/export/json/?apiKey={GI_API_KEY}", stream=True)
     name = f"{s['_id']}_{s['name']}"
-    name = utils.clean_filename(name)
+    name = backup_utils.clean_filename(name)
     zname = os.path.join(BACKUPS_DIR,f"{name}.zip")
     zfile = open(zname, 'wb')
     zfile.write(resp.content)
@@ -75,7 +72,7 @@ for zname in results:
             data = json.loads(ss)
             with open(JSON_FILE, 'w') as outfile:
                 json.dump(data, outfile, sort_keys=False, indent=4)
-            cleaned_name = f"{utils.clean_filename(json_file.rsplit('.',1)[0])}.json"
+            cleaned_name = f"{backup_utils.clean_filename(json_file.rsplit('.',1)[0])}.json"
             #print(json_file,cleaned_name)
             os.rename(
                 JSON_FILE,
