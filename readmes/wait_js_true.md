@@ -1,5 +1,11 @@
 # wait_js_true
 
+Test Defintions .json Format:
+> TODO: i'll add `Selenium IDE v1` format reference version in the future
+
+- [ImportableTestingUtilities/wait_js_true.json](https://github.com/jakedowns/ghost-inspector-helpers/blob/master/ImportableTestingUtilities/wait_js_true.json) 
+- [ImportableTestingUtilities/wait_js_true_single_60s_step.json](https://github.com/jakedowns/ghost-inspector-helpers/blob/master/ImportableTestingUtilities/wait_js_true_single_60s_step.json) 
+
 Ghost Inspector Helper that continually executes a bit of javascript until it returns true (Asyncronous Javascript Promise Resolves `true`) or time runs out. Default Checker Interval / Frequency is 100ms, but you can customize it. Just define a variable named `wait_js_true` to a bit of Javascript (that MUST end with a `return` statement) then Import this helper to proceed once it passes as true
 
 After the importer runs and passes, you can access the "truthy" (non-undefined, non-null, non-empty-string, non-"false", non-"0") result of the operation via the `{{wait_js_true_done}}` variable
@@ -18,6 +24,9 @@ return document.querySelectorAll('{{wait_for_element_selector}}')
 ## Test Definitions:
 
 ### A. Importables - wait_js_true
+
+See Defintion in .json Format: [ImportableTestingUtilities/wait_js_true.json](https://github.com/jakedowns/ghost-inspector-helpers/blob/master/ImportableTestingUtilities/wait_js_true.json)
+> TODO: i'll add `Selenium IDE v1` format reference version in the future
 
 #### Step 1.
 
@@ -52,6 +61,9 @@ return result.trim().length > 0 && result !== "false" && result !== "0";
 
 ### B. Importables - wait_js_true (60s step)
 
+See Defintion in .json Format: [ImportableTestingUtilities/wait_js_true_single_60s_step.json](https://github.com/jakedowns/ghost-inspector-helpers/blob/master/ImportableTestingUtilities/wait_js_true_single_60s_step.json)
+> TODO: i'll add `Selenium IDE v1` format reference version in the future
+
 #### Step. 1
 
 Conditionally:
@@ -70,6 +82,8 @@ return new Promise(async (resolve,reject)=>{
     	let passing = (()=>{
     	    {{wait_js_true}}
     	})();
+        // must resolve as "truthy"
+        // non-null, non-false, non-zero, // add non-empty-string?
     	if(passing){
     		resolve(passing);
     	}else if(performance.now() - start >= MAX){
