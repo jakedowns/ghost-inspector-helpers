@@ -1,14 +1,33 @@
 # wait_js_true
 
-Test Defintions .json Format:
-> TODO: i'll add `Selenium IDE v1` format reference version in the future
+> NOTE: Definition of term: in this context, the term **_"truthy"_** is defined as: a non-undefined, non-null, non-empty-string, non-"false", non-"0" value
+
+What is this?
+This Importable Helper Utility Test is comprised of two Ghost Inspector Tests that continually execute a string of javascript that **_you_** define until it returns a "truthy" value. It fails when time runs out.
+
+What does it do?
+- the first test, using Promises and a loop, waits for Javascript Eventually Returns True (er,... a truthy value) (up to 60 seconds)
+- the second test is a higher order function that wraps the first test and calls it 10x, giving the max wait time of 10 minutes
+
+When/Why is it useful?
+- When you need to wait for something Longer than the maxium `60s` value of the `Settings > Step Timing > Element Timeout` option.
+
+How is it better?
+- it repeats a 60s loop up to 10 times (a max of 10 minutes) to wait for the javascript to resolve.
+
+> NOTE: if you don't want it to wait the full 10 minutes before failing, just include the repeated step less times, or directly import the "single 60s step" instead of the wrapper "repeating" test
+
+Drawbacks?
+- it will take a long time to fail if you're not careful, be sure you know what you're doing
+- it will clutter your test run output with un-hidable "skipped steps" unfortunately. at the veryΩ least, there's an option to "collapse imported steps"
+
+> Note the Default Checker Interval / Frequency is `100ms`, you can modify this as you see fit by altering the `await sleep(100)` bit below 
+
+### Test Defintions in .json Format:
 
 - [ImportableTestingUtilities/wait_js_true.json](https://github.com/jakedowns/ghost-inspector-helpers/blob/master/ImportableTestingUtilities/wait_js_true.json) 
 - [ImportableTestingUtilities/wait_js_true_single_60s_step.json](https://github.com/jakedowns/ghost-inspector-helpers/blob/master/ImportableTestingUtilities/wait_js_true_single_60s_step.json) 
-
-Ghost Inspector Helper that continually executes a bit of javascript until it returns true (Asyncronous Javascript Promise Resolves `true`) or time runs out. Default Checker Interval / Frequency is 100ms, but you can customize it. Just define a variable named `wait_js_true` to a bit of Javascript (that MUST end with a `return` statement) then Import this helper to proceed once it passes as true
-
-After the importer runs and passes, you can access the "truthy" (non-undefined, non-null, non-empty-string, non-"false", non-"0") result of the operation via the `{{wait_js_true_done}}` variable
+> TODO: i'll add `Selenium IDE v1` format reference version in the future
 
 ## Usage:
 
@@ -18,8 +37,22 @@ After the importer runs and passes, you can access the "truthy" (non-undefined, 
 
 Here's an example taken from [readmes/wait_for_element_selector.md](https://github.com/jakedowns/ghost-inspector-helpers/blob/master/readmes/wait_for_element_selector.md) which returns True once the element(s) are in the DOM:
 ```javascript
+return document.querySelectorAll('{{wait_for_element_selector}}').length > 0
+```
+
+you could also have it simply return the .length value 
+
+```javascript
+return document.querySelectorAll('{{wait_for_element_selector}}').length
+```
+
+or even just the resulting Array:
+
+```javascript
 return document.querySelectorAll('{{wait_for_element_selector}}')
 ```
+
+as long as it's "truthy" and will eventually pass.
 
 ## Test Definitions:
 
