@@ -1,7 +1,3 @@
-# Ghostinspector API
-GI_API_KEY = "XXX"
-GIT_AUTHOR = 'Utility Server <utility-server@domain.com>'
-
 import requests
 import os
 import pathlib
@@ -11,49 +7,14 @@ import zipfile
 import json
 import re
 
-"""
-Url: https://gist.github.com/wassname/1393c4a57cfcbf03641dbc31886123b8
-"""
-import unicodedata
-import string
+from dotenv import load_dotenv
+load_dotenv()
 
-valid_filename_chars = "-_.() %s%s" % (string.ascii_letters, string.digits)
-char_limit = 255
+import utils
 
-def clean_filename(filename, whitelist=valid_filename_chars, replace=' '):
-    # replace spaces
-    # for r in replace:
-    #     filename = filename.replace(r,'_')
-
-    # whitespace
-    cleaned_filename = re.sub(' +', '_', filename)
-
-    # rm parens
-    table = str.maketrans(dict.fromkeys("()"))
-    cleaned_filename = cleaned_filename.translate(table)# = re.sub(r" ?\([^)]+\)", "", cleaned_filename)
-
-    # keep only valid ascii chars
-    cleaned_filename = unicodedata.normalize('NFKD', filename).encode('ASCII', 'ignore').decode()
-
-    # dots to _
-    cleaned_filename = cleaned_filename.replace('.','_')
-
-    # alpha numeric and underscores only
-    cleaned_filename = re.sub(r'[^A-Za-z0-9_]+', '', cleaned_filename)
-
-    # double _ to single?
-
-    # keep only whitelisted chars
-    cleaned_filename = ''.join(c for c in cleaned_filename if c in whitelist)
-    if len(cleaned_filename)>char_limit:
-        print("Warning, filename truncated because it was over {}. Filenames may no longer be unique".format(char_limit))
-    return cleaned_filename[:char_limit]
-"""
-END GIST
-"""
-
-def listdir_nohidden(path):
-    return [f for f in os.listdir(path) if not f.startswith('.')]
+# Ghostinspector API
+GI_API_KEY = os.getenv("GI_API_KEY")
+GIT_AUTHOR = os.getenv("GIT_AUTHOR")
 
 cwd = os.getcwd()
 _git = git.cmd.Git(cwd)
@@ -71,7 +32,7 @@ if not os.path.exists(BACKUPS_DIR):
     os.makedirs(BACKUPS_DIR)
 #add_names = []
 try:
-    existing = listdir_nohidden(BACKUPS_DIR)
+    existing = utils.listdir_nohidden(BACKUPS_DIR)
     if len(existing):
         for ex in existing:
             try:
@@ -86,7 +47,7 @@ list_suites_resp = requests.get(f"https://api.ghostinspector.com/v1/suites/?apiK
 def backup_suite(s):
     resp = requests.get(f"https://api.ghostinspector.com/v1/suites/{s['_id']}/export/json/?apiKey={GI_API_KEY}", stream=True)
     name = f"{s['_id']}_{s['name']}"
-    name = clean_filename(name)
+    name = utils.clean_filename(name)
     zname = os.path.join(BACKUPS_DIR,f"{name}.zip")
     zfile = open(zname, 'wb')
     zfile.write(resp.content)
@@ -114,7 +75,7 @@ for zname in results:
             data = json.loads(ss)
             with open(JSON_FILE, 'w') as outfile:
                 json.dump(data, outfile, sort_keys=False, indent=4)
-            cleaned_name = f"{clean_filename(json_file.rsplit('.',1)[0])}.json"
+            cleaned_name = f"{utils.clean_filename(json_file.rsplit('.',1)[0])}.json"
             #print(json_file,cleaned_name)
             os.rename(
                 JSON_FILE,
