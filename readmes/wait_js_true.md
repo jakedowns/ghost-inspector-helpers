@@ -21,17 +21,17 @@ Drawbacks?
 - it will take a long time to fail if you're not careful, be sure you know what you're doing
 - it will clutter your test run output with un-hidable "skipped steps" unfortunately. at the veryΩ least, there's an option to "collapse imported steps"
 
-> Note the Default Checker Interval / Frequency is `100ms`, you can modify this as you see fit by altering the `await sleep(100)` bit below 
+> Note the Default Checker Interval / Frequency is `100ms`, you can modify this as you see fit by altering the `await sleep(100)` bit below
 
 ### Test Defintions in .json Format:
 
-- [ImportableTestingUtilities/wait_js_true.json](https://github.com/jakedowns/ghost-inspector-helpers/blob/master/ImportableTestingUtilities/wait_js_true.json) 
-- [ImportableTestingUtilities/wait_js_true_single_60s_step.json](https://github.com/jakedowns/ghost-inspector-helpers/blob/master/ImportableTestingUtilities/wait_js_true_single_60s_step.json) 
+- [ImportableTestingUtilities/wait_js_true.json](https://github.com/jakedowns/ghost-inspector-helpers/blob/master/ImportableTestingUtilities/wait_js_true.json)
+- [ImportableTestingUtilities/wait_js_true_single_60s_step.json](https://github.com/jakedowns/ghost-inspector-helpers/blob/master/ImportableTestingUtilities/wait_js_true_single_60s_step.json)
 > TODO: i'll add `Selenium IDE v1` format reference version in the future
 
 ## Usage:
 
-### Step 1: 
+### Step 1:
 - `SetVariable` `wait_js_true` =
 > Note this can be whatever as long as it's valid Javascript (ES6 allowed) and ends with a valid `return` statement.
 
@@ -40,7 +40,7 @@ Here's an example taken from [readmes/wait_for_element_selector.md](https://gith
 return document.querySelectorAll('{{wait_for_element_selector}}').length > 0
 ```
 
-you could also have it simply return the .length value 
+you could also have it simply return the .length value
 
 ```javascript
 return document.querySelectorAll('{{wait_for_element_selector}}').length
@@ -77,7 +77,7 @@ max_test_execution_time = 10m /* hard max limit; not configurable */
 ```
 
 > We can repeat this step at most 10 times:
-> 
+>
 > max_test_execution_time / max_element_timeout = 10x
 
 `Import steps from test` = `Importables - wait_js_true (60s step)`
@@ -107,10 +107,10 @@ return !passing.trim().length || passing == "false"; /* !wait_js_true_done? */
 
 Extract From Javascript:
 ```javascript
-const sleep = m => new Promise(r => setTimeout(r, m))
-let start = performance.now();
-const MAX = 59000;
 return new Promise(async (resolve,reject)=>{
+	const sleep = m => new Promise(r => setTimeout(r, m))
+	let start = performance.now();
+	const MAX = 59000;
     let check = async function(){
     	let passing = (()=>{
     	    {{wait_js_true}}
@@ -127,6 +127,6 @@ return new Promise(async (resolve,reject)=>{
     	}
     }
     await check();
-});
+})
 ```
 = `wait_js_true_done`
